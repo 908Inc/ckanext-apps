@@ -1,0 +1,47 @@
+{% extends "page.html" %}
+
+{% block secondary_content %}
+    <section class="module module-narrow module-shallow">
+
+        <div class="module-content">
+            <p class="action">
+                <a class="btn full-width" href="{{ h.url_for('apps_app_add') }}">Створити додаток</a>
+            </p>
+        </div>
+
+        {% if c.userobj.sysadmin %}
+            <div class="module-content">
+                <p class="action">
+                  <a class="btn full-width" href="{{ h.url_for('apps_board_add') }}">Створити тему</a>
+                </p>
+            </div>
+        {% endif %}
+    </section>
+
+    <section class="module module-narrow module-shallow">
+        <div class="module-content">
+            <!--<a href="{{ h.url_for('forum_index') }}"><i class="fa fa-comments "></i>Всі теми</a>-->
+        </div>
+        {% if c.userobj.sysadmin %}
+        <div class="module-content">
+            <a href="{{ h.url_for('apps_activity') }}"><i class="fa fa-comments "></i>Активность</a>
+        </div>
+        {% endif %}
+        <h2 class="module-heading">Перейти до розділу</h2>
+        <div class="module-content">
+            {% for board in board_list %}
+                <div class="thread-section work">
+                    <a href="{{ board.get_absolute_url() }}">{{ board.name }}</a>
+                {% if c.userobj.sysadmin %}
+                    {% if board.active %}
+                        <a href="{{ h.url_for('apps_board_hide', slug=board.slug) }}">{{ _('Hide') }}</a>
+                    {% else %}
+                        <a href="{{ h.url_for('apps_board_unhide', slug=board.slug) }}">{{ _('Show') }}</a>
+                    {% endif %}
+                {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+    </section>
+{% endblock %}

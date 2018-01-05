@@ -1,0 +1,77 @@
+{% extends "apps_base.html" %}
+
+{% block title %}Додатки | Data.gov.ua {% endblock %}
+
+{% block primary_content %}
+    <div class="thread-post">
+        <h1 class="page-heading">Створення додатку</h1>
+
+        <form id="thread-form" data-toggle="validator" role="form" method="post">
+            {{ form.csrf_token }}
+
+            <div class="form-group select-section">
+                <label>Оберіть розділ</label>
+                <select data-placeholder="Тему документу не обрано" class="custom-select chosen-light" name="board_id"
+                        style="display: block;" data-msg-required="Будь ласка, оберіть розділ" required>
+                    <option value=" " disabled selected>Розділ не обрано</option>
+                    {% for board in board_list %}
+                        <option value="{{ board.id }}">{{ board.name }}</option>
+                    {% endfor %}
+                </select>
+                {% if form.board_id.errors %}
+                    <div class="help-block with-errors alert-error">
+                        {% for error in form.board_id.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+            </div>
+            <div class="form-group forum-title-group">
+                <label>Назва</label>
+                <input type="text" placeholder="" class="form-control"
+                       name="name" data-msg-required="Будь ласка, заповніть поле заголовку" value="{{ form.name.data or '' }}" required>
+                {% if form.name.errors %}
+                    <div class="help-block with-errors alert-error">
+                        {% for error in form.name.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label>Лого</label>
+                <input placeholder="" class="form-control"
+                       name="logo" data-msg-required="Будь ласка, заповніть поле заголовку" value="{{ form.logo.data or '' }}" required>
+                {% if form.logo.errors %}
+                    <div class="help-block with-errors alert-error">
+                        {% for error in form.logo.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label>Опишить додаток</label>
+                <textarea class="form-control" rows="8" placeholder="" name="content"
+                          data-msg-required="Будь ласка, заповніть поле запитання" required>{{ form.content.data or '' }}</textarea>
+                {% if form.content.errors %}
+                    <div class="help-block with-errors alert-error">
+                        {% for error in form.content.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <div class="post-footer">
+                <span>* Тут ви можете використовувати Markdown форматування</span>
+
+                <button type="submit" class="btn btn-primary">Створити</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

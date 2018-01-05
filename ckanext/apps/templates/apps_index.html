@@ -1,0 +1,62 @@
+{% extends "apps_base.html" %}
+
+{% block title %}Додатки | Data.gov.ua {% endblock %}
+
+
+{% block primary_content %}
+    <h1 class="page-heading">Додатки</h1>
+    <div class="thread-list">
+        {% for app in apps_list %}
+            <div class="forum-thread media">
+                <div class="media-left pull-left forum-avatar">
+                    <img src="{{ app.logo }}" width="100">
+                </div>
+                <div class="media-body forum-body">
+                    <h3 class="thread-heading">
+                        <a href="{{ app.get_absolute_url() }}">{{ app.name }}</a>
+                    </h3>
+                    <div class="thread-meta">
+                        <div class="thread-author">
+                            <a href="{{ h.url_for(controller='user', action='read', id=app.author.name) }}">{{ app.author.name }}</a>
+                        </div>
+                    </div>
+                    <div class="thread-body" data-thread-url="">
+                        {{ h.render_markdown(app.description)|truncate }}
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+    {% if total_pages > 1 %}
+    <div class="text-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if current_page > 1 %}
+                <li>
+                    <a href="?page={{ current_page - 1 }}" aria-label="Previous">
+                        <span aria-hidden="true">«</span>
+                    </a>
+                </li>
+                {% endif %}
+
+                {% for page in range(1, total_pages + 1, 1) %}
+                <li {% if page == current_page %}class="active"{% endif %}>
+                    <a href="?page={{ page }}">{{ page }}</a>
+                </li>
+                {% endfor %}
+
+                {% if current_page < total_pages %}
+                <li>
+                    <a href="?page={{ current_page + 1 }}" aria-label="Next">
+                        <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    {% endif %}
+{% endblock %}
+
+

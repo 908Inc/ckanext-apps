@@ -1,0 +1,44 @@
+{% extends "apps_base.html" %}
+
+{% block title %}Розділ | Data.gov.ua {% endblock %}
+
+{% block primary_content %}
+    <div class="thread-post">
+        <h1 class="page-heading">Публікація розділу</h1>
+
+        <form id="thread-form" data-toggle="validator" role="form" method="post">
+            {{ form.csrf_token }}
+
+            <div class="form-group forum-title-group">
+                <label>Оберіть заголовок</label>
+                <input type="text" placeholder="" class="form-control"
+                       name="name" data-msg-required="Будь ласка, заповніть поле заголовку" value="{{ form.name.data or '' }}" required>
+                {% if form.name.errors %}
+                    <div class="help-block with-errors">
+                        {% for error in form.name.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group forum-title-group">
+                <label>Слаг</label>
+                <input type="text" placeholder="Только латинский буквы цифры и дефис" class="form-control"
+                       name="slug" data-msg-required="Будь ласка, заповніть поле заголовку" value="{{ form.slug.data or '' }}" required>
+                {% if form.slug.errors %}
+                    <div class="help-block with-errors">
+                        {% for error in form.slug.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <div class="post-footer">
+                <button type="submit" class="btn btn-primary">Опубліковати</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

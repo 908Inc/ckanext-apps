@@ -1,0 +1,38 @@
+{% extends "apps_base.html" %}
+
+{% block title %}Активность - Додатки | Data.gov.ua {% endblock %}
+
+{% block primary_content %}
+    <h1 class="page-heading">{{ _('Activity') }}</h1>
+    <ul class="{% block resource_list_class %}resource-list{% endblock %}">
+        {% for act in activity %}
+            <li class="resource-item" data-id="{{ act.id }}">
+                <a class="heading" href="{{ act.url }}" title="{{ act.name }}">
+                    {{ act.name }}
+                </a>
+                <p class="description">{{ h.markdown_extract(act.content, extract_length=100) }}</p>
+                <a href="{{ h.url_for(controller='user', action='read', id=act.author_name) }}">
+                    {{ act.author_name }}
+                </a> {{ h.time_ago_from_timestamp(act.created) }}
+                <div class="dropdown btn-group">
+                    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-share"></i>
+                        {{ act.status }}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for status in statuses %}
+                          {% if status != act.status %}
+                            <li>
+                                <a href="{{ h.url_for('apps_change_status', id=act.id, status=status) }}">
+                                    <i class="fa fa-bar-chart-o"></i>
+                                    {{ status }}
+                                </a>
+                            </li>
+                          {% endif %}
+                        {% endfor %}
+                    </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
