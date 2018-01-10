@@ -1,0 +1,29 @@
+{% extends "apps_base.html" %}
+
+{% block title %}Додатки | Data.gov.ua {% endblock %}
+
+{% block primary_content %}
+    <div class="thread-post">
+        <h1 class="page-heading">Закрити додаток</h1>
+
+        <form id="thread-form" data-toggle="validator" role="form" method="post">
+            {{ form.csrf_token }}
+
+            <div class="form-group forum-title-group">
+                <label>Назва</label>
+                <input type="text" placeholder="" class="form-control"
+                       name="closed_message" data-msg-required="Вы можете додати повідомлення до додатку перед його закриттям" value="{{ form.closed_message.data or '' }}" required>
+                {% if form.closed_message.errors %}
+                    <div class="help-block with-errors alert-error">
+                        {% for error in form.closed_message.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="post-footer">
+                <button type="submit" class="btn btn-primary">Закрити</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

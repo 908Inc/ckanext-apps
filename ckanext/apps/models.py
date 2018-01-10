@@ -36,7 +36,7 @@ def init_db():
         board_table.create(checkfirst=True)
         app_table.create(checkfirst=True)
         mark_table.create(checkfirst=True)
-        log.debug("Forum tables have been created")
+        log.debug("Apps tables have been created")
 
         for board_name, board_desc in DEFAULT_BOARDS.iteritems():
             board = Board()
@@ -86,11 +86,14 @@ app_table = Table('apps_app', meta.metadata,
                   Column('content', types.UnicodeText),
                   Column('created', types.DateTime, default=datetime.utcnow, nullable=False),
                   Column('status', types.Enum(["active", "pending", "close"], name="app_status"), default="pending"),
+                  Column('closed_message', types.UnicodeText),
+                  Column('image_url', types.UnicodeText),
+                  Column('external_link', types.UnicodeText)
                   )
 
 mark_table = Table('apps_mark', meta.metadata,
                    Column('id', types.Integer, primary_key=True, autoincrement=True),
-                   Column('author_id', types.Unicode, nullable=False, index=True),
+                   Column('user_id', types.Unicode, nullable=False, index=True),
                    Column('app_id', types.Integer,
                           ForeignKey('apps_app.id', onupdate='CASCADE', ondelete='CASCADE'),
                           nullable=False, index=True),
@@ -131,6 +134,13 @@ class Board(object):
             query = cls.order_by(query)
         return query.all()
 
+    @classmethod
+    def filter_active(cls):
+        query = Session.query(cls).filter(cls.active == True)
+        if hasattr(cls, 'order_by') and isCallable(cls.order_by):
+            query = cls.order_by(query)
+        return query.all()
+
     def hide(self):
         self.active = False
         session = Session()
@@ -162,7 +172,7 @@ class App(object):
         return query.order_by(cls.created.desc())
 
     def get_absolute_url(self):
-        return ""
+        return tk.url_for('apps_app_show', id=self.id)
 
     @classmethod
     def filter_board(cls, board_slug):
@@ -178,6 +188,13 @@ class App(object):
     @classmethod
     def all(cls):
         query = Session.query(cls).filter()
+        if hasattr(cls, 'order_by') and isCallable(cls.order_by):
+            query = cls.order_by(query)
+        return query
+
+    @classmethod
+    def all_active(cls):
+        query = Session.query(cls).filter(cls.status == 'active')
         if hasattr(cls, 'order_by') and isCallable(cls.order_by):
             query = cls.order_by(query)
         return query
@@ -199,6 +216,20 @@ class Mark(object):
     def get_by_id(cls, id):
         return Session.query(cls).filter(cls.id == id).first()
 
+    @classmethod
+    def filter_by_user_id(cls, id):
+        return Session.query(cls).filter(cls.user_id == id)
+
+    @classmethod
+    def get_by_user(cls, id):
+        return Session.query(cls).filter(cls.user_id == id).first()
+
+    @classmethod
+    def get_app_mark(cls, app_id):
+        marks = Session.query(cls).filter(cls.app_id == app_id)
+        if not marks.count():  # If no marks then return 0
+            return 0
+        return int(sum([mark.mark for mark in marks])/marks.count())
 
 meta.mapper(Board, board_table)
 
@@ -219,10 +250,10 @@ meta.mapper(App,
 meta.mapper(Mark,
             mark_table,
             properties={
-                'author': relation(User,
-                                   backref=backref('apps_mark', cascade='all, delete-orphan', single_parent=True),
-                                   primaryjoin=foreign(mark_table.c.author_id) == remote(User.id)
-                                   ),
+                'user': relation(User,
+                                 backref=backref('apps_mark', cascade='all, delete-orphan', single_parent=True),
+                                 primaryjoin=foreign(mark_table.c.user_id) == remote(User.id)
+                                 ),
                 'app': relation(App,
                                 backref=backref('apps_mark', cascade='all, delete-orphan', single_parent=True),
                                 primaryjoin=foreign(mark_table.c.app_id) == remote(App.id))

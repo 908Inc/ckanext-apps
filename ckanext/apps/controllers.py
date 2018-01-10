@@ -8,8 +8,8 @@ from ckan.common import c
 from jinja2.filters import do_striptags
 
 
-from ckanext.apps.models import App, Board
-from ckanext.apps.forms import CreateAppForm, CreateBoardForm
+from ckanext.apps.models import App, Board, Mark
+from ckanext.apps.forms import CreateAppForm, CreateBoardForm, CloseAppForm
 
 
 log = logging.getLogger(__name__)
@@ -31,16 +31,72 @@ class AppsController(BaseController):
 
     def index(self):
         page = int(tk.request.GET.get('page', 1))
-        total_pages = int(App.all().count() / self.paginated_by) + 1
+        total_pages = int(App.all_active().count() / self.paginated_by) + 1
         if not 1 < page <= total_pages:
             page = 1
         context = {
-            'apps_list': App.all().offset((page - 1) * self.paginated_by).limit(self.paginated_by),
+            'apps_list': App.all_active().offset((page - 1) * self.paginated_by).limit(self.paginated_by),
             'total_pages': total_pages,
             'current_page': page,
         }
         log.debug('AppsController.index context: %s', context)
         return self.__render('apps_index.html', context)
+
+    def close_app(self, id):
+        if c.userobj is None or not c.userobj.sysadmin:
+            tk.redirect_to(tk.url_for(controller='user', action='login'))
+        app = App.get_by_id(id=id)
+        if not app:
+            tk.redirect_to(tk.url_for('apps_activity'))
+        form = CloseAppForm(tk.request.POST)
+        if tk.request.POST:
+            if form.validate():
+                form.populate_obj(app)
+                app.status = "close"
+                app.save()
+                log.debug("Closed app")
+                flash_success(tk._('You successfully closed app'))
+                tk.redirect_to(tk.url_for('apps_activity'))
+            else:
+                flash_error(tk._('You have errors in form'))
+                log.debug("Validate errors: %s", form.errors)
+        context = {
+            'form': form,
+        }
+        return self.__render('close_app.html', context)
+
+    def show_app(self, id):
+        app = App.get_by_id(id=id)
+        if not app or app.status != "active":
+            return tk.redirect_to(tk.url_for("apps_index"))
+        if c.userobj:
+            mark = Mark.get_by_user(c.userobj.id)
+        else:
+            mark = None
+        return self.__render('show_app.html', {'app': app,
+                                               'my_mark': mark.mark if mark else 0,
+                                               'app_mark': Mark.get_app_mark(app.id)})
+
+    def set_mark(self, id, rate):
+        app = App.get_by_id(id=id)
+        if c.userobj is None:
+            return tk.redirect_to(tk.url_for(controller='user', action='login'))
+        mark = Mark.get_by_user(c.userobj.id)
+        try:
+            rate = int(rate)
+        except ValueError:
+            return tk.redirect_to(tk.url_for('apps_index'))
+        if 1 > rate > 6:
+            return tk.redirect_to(tk.url_for('apps_index'))
+        if not app or app.status != 'active':
+            tk.redirect_to(tk.url_for('apps_index'))
+        if not mark:
+            mark = Mark()
+            mark.user_id = c.userobj.id
+            mark.app_id = app.id
+        mark.mark = int(rate)
+        mark.save()
+        return tk.redirect_to(tk.url_for('apps_app_show', id=app.id))
 
     def app_add(self):
         if c.userobj is None:
@@ -126,6 +182,7 @@ class AppsController(BaseController):
         if c.userobj is None or not c.userobj.sysadmin:
             tk.redirect_to(tk.url_for(controller='user', action='login'))
         app.status = status
+        app.closed_message = ""
         app.save()
         tk.redirect_to(tk.url_for('apps_activity'))
 

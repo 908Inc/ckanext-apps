@@ -5,23 +5,43 @@
 
 {% block primary_content %}
     <h1 class="page-heading">Додатки</h1>
-    <div class="thread-list">
+    <div class="app-list">
         {% for app in apps_list %}
-            <div class="forum-thread media">
-                <div class="media-left pull-left forum-avatar">
-                    <img src="{{ app.logo }}" width="100">
+            <div class="app-thread media">
+                <div class="media-left pull-left app-avatar">
+                    <a href="{{ app.get_absolute_url() }}" >
+                      <img alt="85x85" class="media-object pull-left" src="{{ app.logo }}" width="100">
+                    </a>
                 </div>
-                <div class="media-body forum-body">
-                    <h3 class="thread-heading">
-                        <a href="{{ app.get_absolute_url() }}">{{ app.name }}</a>
-                    </h3>
+                <div class="media-body app-thread-body">
+                    <h3 class="thread-heading">{{ app.name }}</h3>
                     <div class="thread-meta">
-                        <div class="thread-author">
-                            <a href="{{ h.url_for(controller='user', action='read', id=app.author.name) }}">{{ app.author.name }}</a>
+                        <div class="thread-section">
+                            <a href="{{ app.board.get_absolute_url() }}">{{ app.board.name }}</a>
+                        </div>
+                        <div class="app-list-rating">
+                            Рейтинг:
+                            <div class="br-wrapper br-theme-fontawesome-stars">
+                                <select id="example-rating" class="app-rating-stars" style="display: none;">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <div class="br-widget">
+                                    <a href="#" data-rating-value="1" data-rating-text="1" class="br-selected br-current"></a>
+                                    <a href="#" data-rating-value="2" data-rating-text="2"></a>
+                                    <a href="#" data-rating-value="3" data-rating-text="3"></a>
+                                    <a href="#" data-rating-value="4" data-rating-text="4"></a>
+                                    <a href="#" data-rating-value="5" data-rating-text="5"></a>
+                                    <div class="br-current-rating">1</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="thread-body" data-thread-url="">
-                        {{ h.render_markdown(app.description)|truncate }}
+                        {{ h.render_markdown(app.content)|truncate }}
                     </div>
                 </div>
 
