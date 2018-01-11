@@ -31,22 +31,19 @@ def init_db():
         # during tests?
         return
     session = Session()
-    board_exists = board_table.exists()
     for table in [board_table, app_table, mark_table]:
         if not table.exists():
             table.create(checkfirst=True)
             log.debug("Apps {} have been created".format(table.name))
 
-    if not board_exists:
-        for board_name, board_desc in DEFAULT_BOARDS.iteritems():
+    for board_name, board_desc in DEFAULT_BOARDS.iteritems():
+        if not Board.get_by_slug(slugify_url(board_name)):
             board = Board()
             board.name = board_name
             board.slug = slugify_url(board_name)
             board.description = board_desc
             session.add(board)
-
-        if session.new:
-            log.debug('Default boards created')
+            log.debug("Add {0} to {1} table".format(board_name, board_table.name))
             session.commit()
 
     if not migration_table.exists():
