@@ -10,7 +10,7 @@
             {{ form.csrf_token }}
 
             <div class="form-group forum-title-group">
-                <label>Назва</label>
+                <label>Коментар</label>
                 <input type="text" placeholder="" class="form-control"
                        name="closed_message" data-msg-required="Вы можете додати повідомлення до додатку перед його закриттям" value="{{ form.closed_message.data or '' }}" required>
                 {% if form.closed_message.errors %}

@@ -6,7 +6,7 @@
     <div class="thread-post">
         <h1 class="page-heading">Створення додатку</h1>
 
-        <form id="thread-form" data-toggle="validator" role="form" method="post">
+        <form id="thread-form" data-toggle="validator" role="form" method="post" enctype="multipart/form-data">
             {{ form.csrf_token }}
 
             <div class="form-group select-section">
@@ -40,17 +40,26 @@
                 {% endif %}
             </div>
 
-            <div class="form-group">
-                <label>Лого</label>
-                <input placeholder="" class="form-control"
-                       name="logo" data-msg-required="Будь ласка, заповніть поле заголовку" value="{{ form.logo.data or '' }}" required>
-                {% if form.logo.errors %}
+          <div class="form-group forum-title-group">
+                <label>Посилання на додаток</label>
+                <input type="text" placeholder="" class="form-control"
+                       name="external_link" data-msg-required="Будь ласка, заповніть поле" value="{{ form.external_link.data or '' }}" required>
+                {% if form.external_link.errors %}
                     <div class="help-block with-errors alert-error">
-                        {% for error in form.logo.errors %}
+                        {% for error in form.external_link.errors %}
                             {{ error }}
                         {% endfor %}
                     </div>
                 {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label>Логотип</label>
+                <div class="control-group control-full" style="display: block;">
+                    <div class="controls ">
+                        <input id="field-image-upload" type="file" name="image_upload" value="" placeholder="" title="Upload a file on your computer" class="btn" style="width: 89px; display: block;">
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">

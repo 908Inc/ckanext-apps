@@ -5,8 +5,14 @@ from ckan.lib.base import BaseController, abort
 from ckan.plugins import toolkit as tk
 from ckan.lib.helpers import flash_success, flash_error
 from ckan.common import c
-from jinja2.filters import do_striptags
+import ckan.lib.uploader as uploader
+import ckan.lib.navl.dictization_functions as dict_fns
+import ckan.logic as logic
+clean_dict = logic.clean_dict
+parse_params = logic.parse_params
+tuplize_dict = logic.tuplize_dict
 
+from jinja2.filters import do_striptags
 
 from ckanext.apps.models import App, Board, Mark
 from ckanext.apps.forms import CreateAppForm, CreateBoardForm, CloseAppForm
@@ -69,19 +75,13 @@ class AppsController(BaseController):
         app = App.get_by_id(id=id)
         if not app or app.status != "active":
             return tk.redirect_to(tk.url_for("apps_index"))
-        if c.userobj:
-            mark = Mark.get_by_user(c.userobj.id)
-        else:
-            mark = None
-        return self.__render('show_app.html', {'app': app,
-                                               'my_mark': mark.mark if mark else 0,
-                                               'app_mark': Mark.get_app_mark(app.id)})
+        return self.__render('show_app.html', {'app': app})
 
     def set_mark(self, id, rate):
         app = App.get_by_id(id=id)
         if c.userobj is None:
             return tk.redirect_to(tk.url_for(controller='user', action='login'))
-        mark = Mark.get_by_user(c.userobj.id)
+        mark = Mark.get_by_user(c.userobj.id, app.id)
         try:
             rate = int(rate)
         except ValueError:
@@ -90,26 +90,38 @@ class AppsController(BaseController):
             return tk.redirect_to(tk.url_for('apps_index'))
         if not app or app.status != 'active':
             tk.redirect_to(tk.url_for('apps_index'))
+        if app.author_id == c.userobj.id:
+            flash_success(tk._('You can\'t set rank for your app'))
+            return tk.redirect_to(tk.url_for('apps_app_show', id=app.id))
         if not mark:
             mark = Mark()
             mark.user_id = c.userobj.id
             mark.app_id = app.id
-        mark.mark = int(rate)
+        mark.mark = rate
         mark.save()
+        flash_success(tk._('You successfully set rank {0}'.format(rate)))
         return tk.redirect_to(tk.url_for('apps_app_show', id=app.id))
 
     def app_add(self):
         if c.userobj is None:
             tk.redirect_to(tk.url_for(controller='user', action='login'))
         form = CreateAppForm(tk.request.POST)
+        data_dict = clean_dict(dict_fns.unflatten(
+            tuplize_dict(parse_params(tk.request.params))))
+        upload = uploader.get_uploader('apps')
         if tk.request.POST:
             if form.validate():
+                # Upload[load image
+                upload.update_data_dict(data_dict, 'image_url',
+                                        'image_upload', 'clear_upload')
+                upload.upload(uploader.get_max_image_size())
+
                 app = App()
                 form.populate_obj(app)
                 app.author_id = c.userobj.id
                 app.content = do_striptags(app.content)
-                app.logo = do_striptags(app.logo)
                 app.status = "pending"
+                app.image_url = data_dict.get('image_url')
                 app.save()
                 log.debug("App data is valid. Content: %s", do_striptags(app.name))
                 flash_success(tk._('You successfully create app'))
@@ -118,7 +130,7 @@ class AppsController(BaseController):
                 flash_error(tk._('You have errors in form'))
                 log.info("Validate errors: %s", form.errors)
         context = {
-            'form': form,
+            'form': form
         }
         log.debug('ForumController.thread_add context: %s', context)
         return self.__render('create_app.html', context)
@@ -141,7 +153,7 @@ class AppsController(BaseController):
             'form': form,
         }
         log.debug('AppsController.thread_add context: %s', context)
-        return self.__render('create_board.html', context)
+        return self.__render('create_app_board.html', context)
 
     def board_show(self, slug):
         board = Board.get_by_slug(slug)

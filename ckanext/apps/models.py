@@ -30,14 +30,14 @@ def init_db():
     if not model.package_table.exists():
         # during tests?
         return
-
     session = Session()
-    if not board_table.exists():
-        board_table.create(checkfirst=True)
-        app_table.create(checkfirst=True)
-        mark_table.create(checkfirst=True)
-        log.debug("Apps tables have been created")
+    board_exists = board_table.exists()
+    for table in [board_table, app_table, mark_table]:
+        if not table.exists():
+            table.create(checkfirst=True)
+            log.debug("Apps {} have been created".format(table.name))
 
+    if not board_exists:
         for board_name, board_desc in DEFAULT_BOARDS.iteritems():
             board = Board()
             board.name = board_name
@@ -85,7 +85,7 @@ app_table = Table('apps_app', meta.metadata,
                   Column('name', types.Unicode(128)),
                   Column('content', types.UnicodeText),
                   Column('created', types.DateTime, default=datetime.utcnow, nullable=False),
-                  Column('status', types.Enum(["active", "pending", "close"], name="app_status"), default="pending"),
+                  Column('status', types.Enum("active", "pending", "close", name="app_status"), default="pending"),
                   Column('closed_message', types.UnicodeText),
                   Column('image_url', types.UnicodeText),
                   Column('external_link', types.UnicodeText)
@@ -159,6 +159,13 @@ class App(object):
     App thread mapping class
     """
 
+    def get_rate(self):
+        session = Session()
+        marks = session.query(Mark).filter(Mark.app_id == self.id)
+        if not marks.count():  # If no marks then return 0
+            return 0
+        return int(sum([mark.mark for mark in marks]) / marks.count())
+
     @classmethod
     def get_by_id(cls, id):
         return Session.query(cls).filter(cls.id == id).first()
@@ -194,7 +201,9 @@ class App(object):
 
     @classmethod
     def all_active(cls):
-        query = Session.query(cls).filter(cls.status == 'active')
+        query = Session.query(cls).filter(
+            cls.status == 'active',
+            cls.board_id.in_([b.id for b in Board.filter_active()]))
         if hasattr(cls, 'order_by') and isCallable(cls.order_by):
             query = cls.order_by(query)
         return query
@@ -221,15 +230,8 @@ class Mark(object):
         return Session.query(cls).filter(cls.user_id == id)
 
     @classmethod
-    def get_by_user(cls, id):
-        return Session.query(cls).filter(cls.user_id == id).first()
-
-    @classmethod
-    def get_app_mark(cls, app_id):
-        marks = Session.query(cls).filter(cls.app_id == app_id)
-        if not marks.count():  # If no marks then return 0
-            return 0
-        return int(sum([mark.mark for mark in marks])/marks.count())
+    def get_by_user(cls, id, app_id):
+        return Session.query(cls).filter(cls.user_id == id, cls.app_id == app_id).first()
 
 meta.mapper(Board, board_table)
 

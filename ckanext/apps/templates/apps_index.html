@@ -10,7 +10,7 @@
             <div class="app-thread media">
                 <div class="media-left pull-left app-avatar">
                     <a href="{{ app.get_absolute_url() }}" >
-                      <img alt="85x85" class="media-object pull-left" src="{{ app.logo }}" width="100">
+                      <img alt="85x85" class="media-object pull-left" src="{{ h.url_for_static('/uploads/apps/'+app.image_url) }}" width="100">
                     </a>
                 </div>
                 <div class="media-body app-thread-body">
@@ -22,20 +22,11 @@
                         <div class="app-list-rating">
                             Рейтинг:
                             <div class="br-wrapper br-theme-fontawesome-stars">
-                                <select id="example-rating" class="app-rating-stars" style="display: none;">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
                                 <div class="br-widget">
-                                    <a href="#" data-rating-value="1" data-rating-text="1" class="br-selected br-current"></a>
-                                    <a href="#" data-rating-value="2" data-rating-text="2"></a>
-                                    <a href="#" data-rating-value="3" data-rating-text="3"></a>
-                                    <a href="#" data-rating-value="4" data-rating-text="4"></a>
-                                    <a href="#" data-rating-value="5" data-rating-text="5"></a>
-                                    <div class="br-current-rating">1</div>
+                                    {% for rate in [1, 2, 3, 4, 5] %}
+                                      <a href="{{ h.url_for('apps_app_set_mark', id=app.id, rate=rate) }}" data-rating-value="{{ rate }}" data-rating-text="{{ rate }}" {% if rate <= app.get_rate() %}class="br-selected br-current"{%endif%}></a>
+                                    {% endfor %}
+                                    <div class="br-current-rating">{{ app.get_rate() }}</div>
                                 </div>
                             </div>
                         </div>

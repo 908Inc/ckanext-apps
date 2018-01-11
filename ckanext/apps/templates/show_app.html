@@ -9,28 +9,21 @@
       <div class="app-meta">
         <div class="media-left pull-left app-avatar">
           <a href="#">
-            <img alt="85x85" class="media-object pull-left" src="{{ app.logo }}">
+            <img alt="85x85" width="85px" class="media-object pull-left" src="{{ h.url_for_static('/uploads/apps/'+app.image_url) }}">
           </a>
         </div>
         <div class="media-body app-thread-body">
           <h2 class="thread-heading">{{ app.name }}</h2>
           <div class="thread-meta">
             <div class="thread-section"><a href="#">{{ app.board.name }}</a></div>
+
             <div class="app-list-rating">Рейтинг:
               <div class="br-wrapper br-theme-fontawesome-stars">
-                <select id="example-rating" class="app-rating-stars" style="display: none;">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
                 <div class="br-widget">
                   {% for rate in [1, 2, 3, 4, 5] %}
-                    <a href="{{ h.url_for('apps_app_set_mark', id=app.id, rate=rate) }}" data-rating-value="{{ rate }}" data-rating-text="{{ rate }}" class="{% if rate == my_mark %}br-selected br-current{% endif %}"></a>
-                    <a href="">{{ rate }}</a>
+                    <a href="{{ h.url_for('apps_app_set_mark', id=app.id, rate=rate) }}" data-rating-value="{{ rate }}" data-rating-text="{{ rate }}" {% if rate <= app.get_rate() %}class="br-selected br-current"{%endif%}></a>
                   {% endfor %}
-                  <div class="br-current-rating">{{ app_mark }}</div>
+                  <div class="br-current-rating">{{ app.get_rate() }}</div>
                 </div>
               </div>
             </div>
@@ -39,14 +32,14 @@
       </div>
       <div class="app-lead">
         <p class="action">
-          <a class="btn full-width" href="#">Перейти до додатку</a>
+          <a class="btn full-width" href="{{ app.external_link }}">Перейти до додатку</a>
         </p>
       </div>
     </div>
     <div class="clearfix"></div>
     <div class="forum-post-body">
       <div class="app-description">
-        {{ app.content }}
+        {{ h.render_markdown(app.content) }}
       </div>
     </div>
   </div>
