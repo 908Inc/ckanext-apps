@@ -14,7 +14,9 @@
                     </a>
                 </div>
                 <div class="media-body app-thread-body">
-                    <h3 class="thread-heading">{{ app.name }}</h3>
+                    <h3 class="thread-heading">
+                            <a href="{{ app.get_absolute_url() }}">{{ app.name }}</a>
+                    </h3>
                     <div class="thread-meta">
                         <div class="thread-section">
                             <a href="{{ app.board.get_absolute_url() }}">{{ app.board.name }}</a>

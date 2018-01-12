@@ -20,23 +20,23 @@
 
     <section class="module module-narrow module-shallow">
         <div class="module-content">
-            <!--<a href="{{ h.url_for('forum_index') }}"><i class="fa fa-comments "></i>Всі теми</a>-->
+            <a href="{{ h.url_for('apps_index') }}"><i class="fa fa-rocket "></i>Всі додатки</a>
         </div>
         {% if c.userobj.sysadmin %}
         <div class="module-content">
-            <a href="{{ h.url_for('apps_activity') }}"><i class="fa fa-comments "></i>Активність</a>
+            <a href="{{ h.url_for('apps_activity') }}"><i class="fa fa-clock-o "></i>Активність</a>
         </div>
         {% endif %}
         <h2 class="module-heading">Перейти до розділу</h2>
         <div class="module-content">
             {% for board in board_list %}
-                <div class="thread-section work">
+                <div class="thread-section">
                     <a href="{{ board.get_absolute_url() }}">{{ board.name }}</a>
                 {% if c.userobj.sysadmin %}
                     {% if board.active %}
-                        <a href="{{ h.url_for('apps_board_hide', slug=board.slug) }}">{{ _('Hide') }}</a>
+                        <a class="action" href="{{ h.url_for('apps_board_hide', slug=board.slug) }}"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                     {% else %}
-                        <a href="{{ h.url_for('apps_board_unhide', slug=board.slug) }}">{{ _('Show') }}</a>
+                        <a class="action" href="{{ h.url_for('apps_board_unhide', slug=board.slug) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                     {% endif %}
                 {% endif %}
                 </div>
