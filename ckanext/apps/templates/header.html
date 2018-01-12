@@ -1,0 +1,6 @@
+{% ckan_extends %}
+
+{% block header_site_navigation_tabs %}
+{{ super() }}
+<li><a href="{{ h.url_for('apps_index') }}">Apps</a></li>
+{% endblock %}
