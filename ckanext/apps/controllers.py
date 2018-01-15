@@ -8,6 +8,7 @@ from ckan.common import c
 import ckan.lib.uploader as uploader
 import ckan.lib.navl.dictization_functions as dict_fns
 import ckan.logic as logic
+import ckan.lib.jobs as jobs
 clean_dict = logic.clean_dict
 parse_params = logic.parse_params
 tuplize_dict = logic.tuplize_dict
@@ -19,6 +20,19 @@ from ckanext.apps.forms import CreateAppForm, CreateBoardForm, CloseAppForm
 
 
 log = logging.getLogger(__name__)
+
+
+def send_notifications_on_close_app(app):
+    """ Send mail to author when admin close app"""
+    from ckan.lib.mailer import mail_user
+    from ckan.lib.base import render_jinja2
+    from ckan.model import User
+
+    app_author = User.get(app.author_id)
+    body = render_jinja2('app_close_app_mail.html',
+                         {'author_name': app_author.name,
+                          'closed_message': app.closed_message})
+    mail_user(app_author, tk._('Close app'), body)
 
 
 class AppsController(BaseController):
@@ -61,6 +75,7 @@ class AppsController(BaseController):
                 app.status = "close"
                 app.save()
                 log.debug("Closed app")
+                jobs.enqueue(send_notifications_on_close_app, [app])
                 flash_success(tk._('You successfully closed app'))
                 tk.redirect_to(tk.url_for('apps_activity'))
             else:
