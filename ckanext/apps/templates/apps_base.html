@@ -31,14 +31,15 @@
         <div class="module-content">
             {% for board in board_list %}
                 <div class="thread-section">
-                    <a href="{{ board.get_absolute_url() }}">{{ board.name }}</a>
-                {% if c.userobj.sysadmin %}
-                    {% if board.active %}
-                        <a class="action" href="{{ h.url_for('apps_board_hide', slug=board.slug) }}"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-                    {% else %}
-                        <a class="action" href="{{ h.url_for('apps_board_unhide', slug=board.slug) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    {% if c.userobj.sysadmin %}
+                        {% if board.active %}
+                            <a class="action" href="{{ h.url_for('apps_board_hide', slug=board.slug) }}"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                            <a href="{{ board.get_absolute_url() }}">{{ board.name }}</a>
+                        {% else %}
+                            <a class="action" href="{{ h.url_for('apps_board_unhide', slug=board.slug) }}"><i class="fa fa-square-o" aria-hidden="true"></i></a>
+                            <a class="muted" href="{{ board.get_absolute_url() }}">{{ board.name }}</a>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
                 </div>
             {% endfor %}
         </div>
