@@ -1,10 +1,12 @@
 from ckan import plugins
 from ckan.plugins import toolkit as tk
+from ckanext.apps import actions
 
 
 class AppsPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer, inherit=True)
     plugins.implements(plugins.IRoutes, inherit=True)
+    plugins.implements(plugins.IActions, inherit=True)
 
     # IConfigurer
 
@@ -30,3 +32,11 @@ class AppsPlugin(plugins.SingletonPlugin):
             m.connect('apps_change_status', '/apps/:id/:status', action='change_app_status')
             m.connect('apps_app_set_mark', '/apps/mark/:id/:rate', action='set_mark')
         return sub_map
+
+    # IActions
+
+    def get_actions(self):
+        actions_dict = {
+            'apps_active_apps': actions.get_active_apps,
+        }
+        return actions_dict
