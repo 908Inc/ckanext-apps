@@ -1,8 +1,8 @@
 from ckanext.apps.models import App
 
 
-def get_active_apps(context, data_dict):
-    if not data_dict:
+def get_active_apps(context, data_dict=None):
+    if data_dict is None:
         data_dict = dict()
     if "page" not in data_dict:
         data_dict["page"] = 1
