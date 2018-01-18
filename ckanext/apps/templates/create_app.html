@@ -14,7 +14,7 @@
                 <select data-placeholder="Розділ не обрано" class="custom-select chosen-light" name="board_id"
                         style="display: block;" data-msg-required="Будь ласка, оберіть розділ" required>
                     <option></option>
-                    {% for board in board_list %}
+                    {% for board in active_boards %}
                         <option value="{{ board.id }}">{{ board.name }}</option>
                     {% endfor %}
                 </select>
