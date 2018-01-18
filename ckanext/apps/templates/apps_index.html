@@ -10,11 +10,13 @@
             <div class="app-thread media">
                 <div class="media-left pull-left app-avatar">
                     <a href="{{ app.get_absolute_url() }}" >
-                      <img alt="85x85" class="media-object pull-left" src="{{ h.url_for_static('/uploads/apps/'+app.image_url) }}" width="100">
+                      <div class="image" style="background-image:url({{ h.url_for_static('/uploads/apps/'+app.image_url) }} )"></div>
                     </a>
                 </div>
                 <div class="media-body app-thread-body">
-                    <h3 class="thread-heading">{{ app.name }}</h3>
+                    <h3 class="thread-heading">
+                            <a href="{{ app.get_absolute_url() }}">{{ app.name }}</a>
+                    </h3>
                     <div class="thread-meta">
                         <div class="thread-section">
                             <a href="{{ app.board.get_absolute_url() }}">{{ app.board.name }}</a>
@@ -32,7 +34,7 @@
                         </div>
                     </div>
                     <div class="thread-body" data-thread-url="">
-                        {{ h.render_markdown(app.content)|truncate }}
+                        <a href="{{ app.get_absolute_url() }}">{{ h.render_markdown(app.content)|striptags|truncate }}</a>
                     </div>
                 </div>
 

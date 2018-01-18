@@ -4,7 +4,7 @@
 
 {% block primary_content %}
     <h1 class="page-heading">{{ _('Activity') }}</h1>
-    <ul class="{% block resource_list_class %}resource-list{% endblock %}">
+    <ul class="{% block resource_list_class %}resource-list{% endblock %} forum-activity">
         {% for act in activity %}
             <li class="resource-item" data-id="{{ act.id }}">
                 <a class="heading" href="{{ act.url }}" title="{{ act.name }}">
@@ -16,7 +16,6 @@
                 </a> {{ h.time_ago_from_timestamp(act.created) }}
                 <div class="dropdown btn-group">
                     <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-share"></i>
                         {{ act.status }}
                         <span class="caret"></span>
                     </a>

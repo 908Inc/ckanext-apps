@@ -11,9 +11,9 @@
 
             <div class="form-group select-section">
                 <label>Оберіть розділ</label>
-                <select data-placeholder="Тему документу не обрано" class="custom-select chosen-light" name="board_id"
+                <select data-placeholder="Розділ не обрано" class="custom-select chosen-light" name="board_id"
                         style="display: block;" data-msg-required="Будь ласка, оберіть розділ" required>
-                    <option value=" " disabled selected>Розділ не обрано</option>
+                    <option></option>
                     {% for board in board_list %}
                         <option value="{{ board.id }}">{{ board.name }}</option>
                     {% endfor %}
@@ -55,9 +55,9 @@
 
             <div class="form-group">
                 <label>Логотип</label>
-                <div class="control-group control-full" style="display: block;">
+                <div class="control-group control-full forum-title-group" style="display: block;">
                     <div class="controls ">
-                        <input id="field-image-upload" type="file" name="image_upload" value="" placeholder="" title="Upload a file on your computer" class="btn" style="width: 89px; display: block;">
+                        <input id="field-image-upload" type="file" name="image_upload" value="" placeholder="" title="Upload a file on your computer" class="btn" style="width: 89px; display: block;" data-msg-required="Будь ласка, завантажте логотип" required>
                     </div>
                 </div>
             </div>
@@ -83,4 +83,11 @@
             </div>
         </form>
     </div>
+{% endblock %}
+
+{% block scripts %}
+        {{ super() }}  
+        {% resource 'forum/javascript/autosize.js' %}
+        {% resource 'forum/javascript/jquery.validate.js' %}     
+        {% resource 'forum/javascript/forms_validate.js' %}
 {% endblock %}
