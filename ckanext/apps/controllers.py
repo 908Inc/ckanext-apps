@@ -55,7 +55,9 @@ class AppsController(BaseController):
         if not 1 < page <= total_pages:
             page = 1
         context = {
-            'apps_list': App.all_active().offset((page - 1) * self.paginated_by).limit(self.paginated_by),
+            'apps_list': tk.get_action('apps_active_apps')(
+                data_dict={"page": page, "paginated_by": self.paginated_by}
+            ),
             'total_pages': total_pages,
             'current_page': page,
         }
