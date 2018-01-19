@@ -22,17 +22,19 @@ from ckanext.apps.forms import CreateAppForm, CreateBoardForm, CloseAppForm
 log = logging.getLogger(__name__)
 
 
-def send_notifications_on_close_app(app):
-    """ Send mail to author when admin close app"""
+def send_notifications_on_change_app_status(app, status):
+    """ Send mail when app changes status  """
     from ckan.lib.mailer import mail_user
     from ckan.lib.base import render_jinja2
     from ckan.model import User
 
     app_author = User.get(app.author_id)
-    body = render_jinja2('app_close_app_mail.html',
-                         {'author_name': app_author.name,
-                          'closed_message': app.closed_message})
-    mail_user(app_author, tk._('Close app'), body)
+    data = {'author_name': app_author.name}
+    template_name = 'mails/app_{0}_app_mail.html'.format(status)
+    if status == 'close':
+        data['closed_message'] = app.closed_message
+    body = render_jinja2(template_name, data)
+    mail_user(app_author, tk._('{0} app'.format(status)), body)
 
 
 class AppsController(BaseController):
@@ -77,7 +79,7 @@ class AppsController(BaseController):
                 app.status = "close"
                 app.save()
                 log.debug("Closed app")
-                jobs.enqueue(send_notifications_on_close_app, [app])
+                jobs.enqueue(send_notifications_on_change_app_status, [app, 'close'])
                 flash_success(tk._('You successfully closed app'))
                 tk.redirect_to(tk.url_for('apps_activity'))
             else:
@@ -142,6 +144,7 @@ class AppsController(BaseController):
                 app.save()
                 log.debug("App data is valid. Content: %s", do_striptags(app.name))
                 flash_success(tk._('You successfully create app'))
+                jobs.enqueue(send_notifications_on_change_app_status, [app, 'pending'])
                 tk.redirect_to(app.get_absolute_url())
             else:
                 flash_error(tk._('You have errors in form'))
@@ -214,6 +217,8 @@ class AppsController(BaseController):
         app.status = status
         app.closed_message = ""
         app.save()
+        if app.status == 'active':
+            jobs.enqueue(send_notifications_on_change_app_status, [app, 'active'])
         tk.redirect_to(tk.url_for('apps_activity'))
 
     def board_hide(self, slug):
