@@ -84,7 +84,7 @@ class AppsController(BaseController):
                 flash_error(tk._('You have errors in form'))
                 log.debug("Validate errors: %s", form.errors)
         context = {
-            'form': form,
+            'form': form
         }
         return self.__render('close_app.html', context)
 
@@ -147,7 +147,8 @@ class AppsController(BaseController):
                 flash_error(tk._('You have errors in form'))
                 log.info("Validate errors: %s", form.errors)
         context = {
-            'form': form
+            'form': form,
+            'active_boards': Board.filter_active()
         }
         log.debug('ForumController.thread_add context: %s', context)
         return self.__render('create_app.html', context)
