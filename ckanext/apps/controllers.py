@@ -51,7 +51,7 @@ class AppsController(BaseController):
 
     def index(self):
         page = int(tk.request.GET.get('page', 1))
-        total_pages = int(App.all_active().count() / self.paginated_by) + 1
+        total_pages = (App.all_active().count() - 1) / self.paginated_by + 1
         if not 1 < page <= total_pages:
             page = 1
         context = {
