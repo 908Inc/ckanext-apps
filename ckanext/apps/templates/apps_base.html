@@ -5,14 +5,14 @@
 
         <div class="module-content">
             <p class="action">
-                <a class="btn full-width" href="{{ h.url_for('apps_app_add') }}">Створити додаток</a>
+                <a class="btn full-width" href="{{ h.url_for('apps_app_add') }}">{% trans %}Create Application{% endtrans %}</a>
             </p>
         </div>
 
         {% if c.userobj.sysadmin %}
             <div class="module-content">
                 <p class="action">
-                  <a class="btn full-width" href="{{ h.url_for('apps_board_add') }}">Створити тему</a>
+                  <a class="btn full-width" href="{{ h.url_for('apps_board_add') }}">{% trans %}Create Section{% endtrans %}</a>
                 </p>
             </div>
         {% endif %}
@@ -20,14 +20,14 @@
 
     <section class="module module-narrow module-shallow">
         <div class="module-content">
-            <a href="{{ h.url_for('apps_index') }}"><i class="fa fa-rocket "></i>Всі додатки</a>
+            <a href="{{ h.url_for('apps_index') }}"><i class="fa fa-rocket "></i>{% trans %}All Applications{% endtrans %}</a>
         </div>
         {% if c.userobj.sysadmin %}
         <div class="module-content">
-            <a href="{{ h.url_for('apps_activity') }}"><i class="fa fa-clock-o "></i>Активність</a>
+            <a href="{{ h.url_for('apps_activity') }}"><i class="fa fa-clock-o "></i>{% trans %}Activity{% endtrans %}</a>
         </div>
         {% endif %}
-        <h2 class="module-heading">Перейти до розділу</h2>
+        <h2 class="module-heading">{% trans %}Choose a Section{% endtrans %}</h2>
         <div class="module-content">
             {% for board in board_list %}
                 <div class="thread-section">

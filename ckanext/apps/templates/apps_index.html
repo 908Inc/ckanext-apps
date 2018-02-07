@@ -1,10 +1,10 @@
 {% extends "apps_base.html" %}
 
-{% block title %}Додатки | Data.gov.ua {% endblock %}
+{% block title %}{% trans %}Applications{% endtrans %} | Data.gov.ua {% endblock %}
 
 
 {% block primary_content %}
-    <h1 class="page-heading">Додатки</h1>
+    <h1 class="page-heading">{% trans %}Applications{% endtrans %}</h1>
     <div class="app-list">
         {% for app in apps_list %}
             <div class="app-thread media">
