@@ -1,23 +1,22 @@
 import logging
 from operator import itemgetter
 
-from ckan.lib.base import BaseController, abort
-from ckan.plugins import toolkit as tk
-from ckan.lib.helpers import flash_success, flash_error
-from ckan.common import c
-import ckan.lib.uploader as uploader
-import ckan.lib.navl.dictization_functions as dict_fns
-import ckan.logic as logic
 import ckan.lib.jobs as jobs
+import ckan.lib.navl.dictization_functions as dict_fns
+import ckan.lib.uploader as uploader
+import ckan.logic as logic
+from ckan.common import c
+from ckan.lib.base import BaseController, abort
+from ckan.lib.helpers import flash_success, flash_error
+from ckan.plugins import toolkit as tk
+from jinja2.filters import do_striptags
+
+from ckanext.apps.forms import CreateAppForm, CreateBoardForm, CloseAppForm
+from ckanext.apps.models import App, Board, Mark
+
 clean_dict = logic.clean_dict
 parse_params = logic.parse_params
 tuplize_dict = logic.tuplize_dict
-
-from jinja2.filters import do_striptags
-
-from ckanext.apps.models import App, Board, Mark
-from ckanext.apps.forms import CreateAppForm, CreateBoardForm, CloseAppForm
-
 
 log = logging.getLogger(__name__)
 
@@ -186,7 +185,8 @@ class AppsController(BaseController):
             page = 1
         context = {
             'board': board,
-            'apps_list': App.filter_board(board_slug=board.slug).offset((page - 1) * self.paginated_by).limit(self.paginated_by),
+            'apps_list': App.filter_board(board_slug=board.slug).offset((page - 1) * self.paginated_by).limit(
+                self.paginated_by),
             'total_pages': total_pages,
             'current_page': page,
         }
