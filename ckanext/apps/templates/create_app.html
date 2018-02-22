@@ -1,18 +1,18 @@
 {% extends "apps_base.html" %}
 
-{% block title %}Додатки | Data.gov.ua {% endblock %}
+{% block title %}{% trans %}Create an Application{% endtrans %} - {% trans %}Applications{% endtrans %} | Data.gov.ua {% endblock %}
 
 {% block primary_content %}
     <div class="thread-post">
-        <h1 class="page-heading">Створення додатку</h1>
+        <h1 class="page-heading">{% trans %}Create an Application{% endtrans %}</h1>
 
         <form id="thread-form" data-toggle="validator" role="form" method="post" enctype="multipart/form-data">
             {{ form.csrf_token }}
 
             <div class="form-group select-section">
-                <label>Оберіть розділ</label>
-                <select data-placeholder="Розділ не обрано" class="custom-select chosen-light" name="board_id"
-                        style="display: block;" data-msg-required="Будь ласка, оберіть розділ" required>
+                <label>{% trans %}Select a Section{% endtrans %}</label>
+                <select data-placeholder="{% trans %}The section is not selected{% endtrans %}" class="custom-select chosen-light" name="board_id"
+                        style="display: block;" data-msg-required="{% trans %}Please select the section{% endtrans %}" required>
                     <option></option>
                     {% for board in active_boards %}
                         <option value="{{ board.id }}">{{ board.name }}</option>
@@ -28,9 +28,9 @@
 
             </div>
             <div class="form-group forum-title-group">
-                <label>Назва</label>
+                <label>{% trans %}Provide a Title{% endtrans %}</label>
                 <input type="text" placeholder="" class="form-control"
-                       name="name" data-msg-required="Будь ласка, заповніть поле заголовку" value="{{ form.name.data or '' }}" required>
+                       name="name" data-msg-required="{% trans %}Please fill out the title field{% endtrans %}" value="{{ form.name.data or '' }}" required>
                 {% if form.name.errors %}
                     <div class="help-block with-errors alert-error">
                         {% for error in form.name.errors %}
@@ -41,9 +41,9 @@
             </div>
 
           <div class="form-group forum-title-group">
-                <label>Посилання на додаток</label>
+                <label>{% trans %}Link to the Application{% endtrans %}</label>
                 <input type="text" placeholder="" class="form-control"
-                       name="external_link" data-msg-required="Будь ласка, заповніть поле" value="{{ form.external_link.data or '' }}" required>
+                       name="external_link" data-msg-required="{% trans %}Please provide the link{% endtrans %}" value="{{ form.external_link.data or '' }}" required>
                 {% if form.external_link.errors %}
                     <div class="help-block with-errors alert-error">
                         {% for error in form.external_link.errors %}
@@ -54,18 +54,18 @@
             </div>
 
             <div class="form-group">
-                <label>Логотип</label>
+                <label>{% trans %}Logo{% endtrans %}</label>
                 <div class="control-group control-full forum-title-group" style="display: block;">
                     <div class="controls ">
-                        <input id="field-image-upload" type="file" name="image_upload" value="" placeholder="" title="Upload a file on your computer" class="btn" style="width: 89px; display: block;" data-msg-required="Будь ласка, завантажте логотип" required>
+                        <input id="field-image-upload" type="file" name="image_upload" value="" placeholder="" title="Upload a file on your computer" class="btn" style="width: 89px; display: block;" data-msg-required="{% trans %}Please, upload the logo{% endtrans %}" required>
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label>Опишить додаток</label>
+                <label>{% trans %}Application's Description{% endtrans %}</label>
                 <textarea class="form-control" rows="8" placeholder="" name="content"
-                          data-msg-required="Будь ласка, заповніть поле запитання" required>{{ form.content.data or '' }}</textarea>
+                          data-msg-required="{% trans %}Please fill out the description field{% endtrans %}" required>{{ form.content.data or '' }}</textarea>
                 {% if form.content.errors %}
                     <div class="help-block with-errors alert-error">
                         {% for error in form.content.errors %}
@@ -77,9 +77,9 @@
             </div>
 
             <div class="post-footer">
-                <span>* Тут ви можете використовувати Markdown форматування</span>
+                <span>* {% trans %}You can use Markdown formatting here{% endtrans %}</span>
 
-                <button type="submit" class="btn btn-primary">Створити</button>
+                <button type="submit" class="btn btn-primary">{% trans %}Create{% endtrans %}</button>
             </div>
         </form>
     </div>

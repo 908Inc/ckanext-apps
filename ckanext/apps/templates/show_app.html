@@ -1,6 +1,6 @@
 {% extends "apps_base.html" %}
 
-{% block title %}Додатки | Data.gov.ua {% endblock %}
+{% block title %}{% if app %}{{ app.name }} - {% endif %}{% trans %}Applications{% endtrans %} | Data.gov.ua {% endblock %}
 
 
 {% block primary_content %}
@@ -17,7 +17,7 @@
           <div class="thread-meta">
             <div class="thread-section"><a href="#">{{ app.board.name }}</a></div>
 
-            <div class="app-list-rating">Рейтинг:
+            <div class="app-list-rating">{% trans %}Rating{% endtrans %}:
               <div class="br-wrapper br-theme-fontawesome-stars">
                 <div class="br-widget">
                   {% for rate in [1, 2, 3, 4, 5] %}
@@ -32,7 +32,7 @@
       </div>
       <div class="app-lead">
         <p class="action">
-          <a class="btn full-width" href="{{ app.external_link }}">Перейти до додатку</a>
+          <a class="btn full-width" href="{{ app.external_link }}">{% trans %}Go to Application{% endtrans %}</a>
         </p>
       </div>
     </div>
