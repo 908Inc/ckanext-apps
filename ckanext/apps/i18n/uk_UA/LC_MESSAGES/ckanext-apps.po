@@ -1,0 +1,214 @@
+# Ukrainian (Ukraine) translations for ckanext-apps.
+# Copyright (C) 2018 ORGANIZATION
+# This file is distributed under the same license as the ckanext-apps
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ckanext-apps 0.0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2018-03-02 11:10+0000\n"
+"PO-Revision-Date: 2018-03-02 11:11+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: uk_UA\n"
+"Language-Team: uk_UA <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.3\n"
+
+#: ckanext/apps/controllers.py:37
+msgid "{0} app"
+msgstr ""
+
+#: ckanext/apps/controllers.py:83
+msgid "You successfully closed app"
+msgstr ""
+
+#: ckanext/apps/controllers.py:86 ckanext/apps/controllers.py:150
+#: ckanext/apps/controllers.py:171
+msgid "You have errors in form"
+msgstr ""
+
+#: ckanext/apps/controllers.py:113
+msgid "You can't set rank for your app"
+msgstr ""
+
+#: ckanext/apps/controllers.py:121
+msgid "You successfully set rank {0}"
+msgstr ""
+
+#: ckanext/apps/controllers.py:146
+msgid "You successfully create app"
+msgstr ""
+
+#: ckanext/apps/controllers.py:168
+msgid "You successfully create thread"
+msgstr ""
+
+#: ckanext/apps/controllers.py:231
+msgid "You successfully hided board"
+msgstr ""
+
+#: ckanext/apps/controllers.py:241
+msgid "You successfully unhided board"
+msgstr ""
+
+#: ckanext/apps/templates/apps_activity.html:3
+#: ckanext/apps/templates/apps_activity.html:6
+#: ckanext/apps/templates/apps_base.html:27
+msgid "Activity"
+msgstr ""
+
+#: ckanext/apps/templates/apps_activity.html:3
+#: ckanext/apps/templates/apps_index.html:3
+#: ckanext/apps/templates/apps_index.html:7
+#: ckanext/apps/templates/close_app.html:3
+#: ckanext/apps/templates/create_app.html:3
+#: ckanext/apps/templates/create_app_board.html:3
+#: ckanext/apps/templates/header.html:5 ckanext/apps/templates/show_app.html:3
+msgid "Applications"
+msgstr "Додатки"
+
+#: ckanext/apps/templates/apps_base.html:8
+msgid "Create Application"
+msgstr ""
+
+#: ckanext/apps/templates/apps_base.html:15
+#: ckanext/apps/templates/create_app_board.html:3
+#: ckanext/apps/templates/create_app_board.html:7
+msgid "Create Section"
+msgstr ""
+
+#: ckanext/apps/templates/apps_base.html:23
+msgid "All Applications"
+msgstr ""
+
+#: ckanext/apps/templates/apps_base.html:30
+msgid "Choose a Section"
+msgstr ""
+
+#: ckanext/apps/templates/close_app.html:3
+#: ckanext/apps/templates/close_app.html:7
+#: ckanext/apps/templates/close_app.html:25
+msgid "Reject the Application"
+msgstr ""
+
+#: ckanext/apps/templates/close_app.html:13
+msgid "Comment"
+msgstr ""
+
+#: ckanext/apps/templates/close_app.html:15
+msgid "You can attach a message regarding the application before rejecting it"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:3
+#: ckanext/apps/templates/create_app.html:7
+msgid "Create an Application"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:13
+msgid "Select a Section"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:14
+msgid "The section is not selected"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:15
+msgid "Please select the section"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:31
+#: ckanext/apps/templates/create_app_board.html:13
+msgid "Provide a Title"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:33
+#: ckanext/apps/templates/create_app_board.html:15
+msgid "Please fill out the title field"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:44
+msgid "Link to the Application"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:46
+msgid "Please provide the link"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:57
+msgid "Logo"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:60
+msgid "Please, upload the logo"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:66
+msgid "Application's Description"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:68
+msgid "Please fill out the description field"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:80
+msgid "You can use Markdown formatting here"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:82
+msgid "Create"
+msgstr ""
+
+#: ckanext/apps/templates/create_app_board.html:26
+msgid "Slug"
+msgstr ""
+
+#: ckanext/apps/templates/create_app_board.html:27
+msgid "Only latin characters, digits and a hyphen"
+msgstr ""
+
+#: ckanext/apps/templates/create_app_board.html:28
+msgid "Please provide the slug"
+msgstr ""
+
+#: ckanext/apps/templates/create_app_board.html:40
+msgid "Publish"
+msgstr ""
+
+#: ckanext/apps/templates/show_app.html:20
+msgid "Rating"
+msgstr ""
+
+#: ckanext/apps/templates/show_app.html:35
+msgid "Go to Application"
+msgstr ""
+
+#: ckanext/apps/templates/mails/app_active_app_mail.html:1
+#: ckanext/apps/templates/mails/app_close_app_mail.html:1
+#: ckanext/apps/templates/mails/app_pending_app_mail.html:1
+msgid "Hello!"
+msgstr ""
+
+#: ckanext/apps/templates/mails/app_active_app_mail.html:3
+#: ckanext/apps/templates/mails/app_close_app_mail.html:3
+#: ckanext/apps/templates/mails/app_pending_app_mail.html:3
+msgid "User"
+msgstr ""
+
+#: ckanext/apps/templates/mails/app_active_app_mail.html:3
+msgid "your app was approved"
+msgstr ""
+
+#: ckanext/apps/templates/mails/app_close_app_mail.html:3
+msgid "your app was rejected. See the reason in the The following message:"
+msgstr ""
+
+#: ckanext/apps/templates/mails/app_pending_app_mail.html:3
+msgid "your app was created, and is pending for our approval"
+msgstr ""
+
