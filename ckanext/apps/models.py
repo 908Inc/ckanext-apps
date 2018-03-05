@@ -4,14 +4,12 @@ from datetime import datetime
 from operator import isCallable
 
 from ckan import model
-from ckan.model import meta, User, Package, Session, Resource
+from ckan.model import meta, User, Session
 from ckan.plugins import toolkit as tk
-
+from slugify import slugify
 from sqlalchemy import types, Table, ForeignKey, Column
-from sqlalchemy.orm import relation, backref, foreign, remote
 from sqlalchemy.exc import ProgrammingError
-
-from slugify import slugify_url
+from sqlalchemy.orm import relation, backref, foreign, remote
 
 log = logging.getLogger(__name__)
 
@@ -37,10 +35,10 @@ def init_db():
             log.debug("Apps {} have been created".format(table.name))
 
     for board_name, board_desc in DEFAULT_BOARDS.iteritems():
-        if not Board.get_by_slug(slugify_url(board_name)):
+        if not Board.get_by_slug(slugify(board_name)):
             board = Board()
             board.name = board_name
-            board.slug = slugify_url(board_name)
+            board.slug = slugify(board_name)
             board.description = board_desc
             session.add(board)
             log.debug("Add {0} to {1} table".format(board_name, board_table.name))
@@ -117,7 +115,7 @@ class Board(object):
 
     def save(self, commit=True):
         if not hasattr(self, 'slug') or not self.slug:
-            self.slug = slugify_url(self.name)
+            self.slug = slugify(self.name)
         session = Session()
         log.debug(self)
         session.add(self)

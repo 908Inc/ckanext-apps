@@ -1,2 +1,2 @@
-wtforms
-awesome-slugify
+wtforms==2.1
+python-slugify==1.2.4
