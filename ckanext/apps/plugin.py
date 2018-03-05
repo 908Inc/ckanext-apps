@@ -3,7 +3,18 @@ from ckan.plugins import toolkit as tk
 from ckanext.apps import actions
 
 
-class AppsPlugin(plugins.SingletonPlugin):
+if tk.check_ckan_version(min_version='2.5'):
+    from ckan.lib.plugins import DefaultTranslation
+
+
+    class AppsPluginBase(plugins.SingletonPlugin, DefaultTranslation):
+        plugins.implements(plugins.ITranslation, inherit=True)
+else:
+    class AppsPluginBase(plugins.SingletonPlugin):
+        pass
+
+
+class AppsPlugin(AppsPluginBase):
     plugins.implements(plugins.IConfigurer, inherit=True)
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IActions, inherit=True)
