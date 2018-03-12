@@ -37,7 +37,7 @@ def send_notifications_on_change_app_status(app, status):
 
 
 class AppsController(BaseController):
-    paginated_by = 3
+    paginated_by = 10
 
     def __render(self, template_name, context):
         if c.userobj is None or not c.userobj.sysadmin:
@@ -51,7 +51,10 @@ class AppsController(BaseController):
         return tk.render(template_name, context)
 
     def index(self):
-        page = int(tk.request.GET.get('page', 1))
+        page = tk.request.GET.get('page', '1')
+        if not page.isdigit():
+            page = 1
+        page = int(page)
         total_pages = (App.all_active().count() - 1) / self.paginated_by + 1
         if not 1 < page <= total_pages:
             page = 1
@@ -132,19 +135,22 @@ class AppsController(BaseController):
                 # Upload[load image
                 upload.update_data_dict(data_dict, 'image_url',
                                         'image_upload', 'clear_upload')
-                upload.upload(uploader.get_max_image_size())
-
-                app = App()
-                form.populate_obj(app)
-                app.author_id = c.userobj.id
-                app.content = do_striptags(app.content)
-                app.status = "pending"
-                app.image_url = data_dict.get('image_url')
-                app.save()
-                log.debug("App data is valid. Content: %s", do_striptags(app.name))
-                flash_success(tk._('You successfully create app'))
-                jobs.enqueue(send_notifications_on_change_app_status, [app, 'pending'])
-                tk.redirect_to(app.get_absolute_url())
+                try:
+                    upload.upload(uploader.get_max_image_size())
+                except logic.ValidationError as err:
+                    flash_error(err.error_dict['image_upload'][0])
+                else:
+                    app = App()
+                    form.populate_obj(app)
+                    app.author_id = c.userobj.id
+                    app.content = do_striptags(app.content)
+                    app.status = "pending"
+                    app.image_url = data_dict.get('image_url')
+                    app.save()
+                    log.debug("App data is valid. Content: %s", do_striptags(app.name))
+                    flash_success(tk._('You successfully create app'))
+                    jobs.enqueue(send_notifications_on_change_app_status, [app, 'pending'])
+                    tk.redirect_to(app.get_absolute_url())
             else:
                 flash_error(tk._('You have errors in form'))
                 log.info("Validate errors: %s", form.errors)
@@ -179,7 +185,7 @@ class AppsController(BaseController):
         board = Board.get_by_slug(slug)
         if not board:
             abort(404)
-        page = int(tk.request.GET.get('page', 1))
+        page = int(tk.request.GET.get('page', '1'))
         total_pages = int(App.filter_board(board_slug=board.slug).count() / self.paginated_by) + 1
         if not 1 < page <= total_pages:
             page = 1
@@ -194,7 +200,14 @@ class AppsController(BaseController):
         return self.__render('apps_index.html', context)
 
     def activity(self):
-        apps_activity = App.all().order_by(App.created.desc())
+        page = tk.request.GET.get('page', 1)
+        if not page.isdigit():
+            page = 1
+        page = int(page)
+        total_pages = (App.all().count() - 1) / self.paginated_by + 1
+        if not 1 < page <= total_pages:
+            page = 1
+        apps_activity = App.all().order_by(App.created.desc()).offset((page - 1) * self.paginated_by).limit(self.paginated_by)
         activity = [dict(id=i.id,
                          url=i.get_absolute_url(),
                          content=i.content,
@@ -204,7 +217,9 @@ class AppsController(BaseController):
                          created=i.created) for i in apps_activity]
         context = {
             'activity': sorted(activity, key=itemgetter('created'), reverse=True),
-            'statuses': ["active", "pending", "close"]
+            'statuses': ["active", "pending", "close"],
+            'total_pages': total_pages,
+            'current_page': page
         }
         return self.__render('apps_activity.html', context)
 
