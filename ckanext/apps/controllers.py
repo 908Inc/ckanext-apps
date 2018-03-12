@@ -1,10 +1,13 @@
 import logging
+import os
 from operator import itemgetter
 
 import ckan.lib.jobs as jobs
 import ckan.lib.navl.dictization_functions as dict_fns
 import ckan.lib.uploader as uploader
 import ckan.logic as logic
+import jinja2
+from babel.support import Translations
 from ckan.common import c
 from ckan.lib.base import BaseController, abort
 from ckan.lib.helpers import flash_success, flash_error
@@ -21,19 +24,29 @@ tuplize_dict = logic.tuplize_dict
 log = logging.getLogger(__name__)
 
 
-def send_notifications_on_change_app_status(app, status):
+def send_notifications_on_change_app_status(app, status, lang):
     """ Send mail when app changes status  """
-    from ckan.lib.mailer import mail_user
-    from ckan.lib.base import render_jinja2
     from ckan.model import User
+
+    template_dir = os.path.join(os.path.dirname(__file__), 'templates')
+    locale_dir = os.path.join(os.path.dirname(__file__), 'i18n')
+    env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), extensions=['jinja2.ext.i18n'])
+    translations = Translations.load(locale_dir, [lang], domain='ckanext-forum')
+    env.install_gettext_translations(translations)
+    env.globals['get_locale'] = lambda: lang
 
     app_author = User.get(app.author_id)
     data = {'author_name': app_author.name}
     template_name = 'mails/app_{0}_app_mail.html'.format(status)
+    template = env.get_template(template_name)
     if status == 'close':
         data['closed_message'] = app.closed_message
-    body = render_jinja2(template_name, data)
-    mail_user(app_author, tk._('{0} app'.format(status)), body)
+    body = template.render(data)
+    tk.get_action('send_mail')({}, {
+        'to': app_author.email,
+        'subject': env.globals['gettext']('{0} app'.format(status)),
+        'message_html': body
+    })
 
 
 class AppsController(BaseController):
@@ -81,7 +94,8 @@ class AppsController(BaseController):
                 app.status = "close"
                 app.save()
                 log.debug("Closed app")
-                jobs.enqueue(send_notifications_on_change_app_status, [app, 'close'])
+                jobs.enqueue(send_notifications_on_change_app_status,
+                             [app, 'close', tk.request.environ.get('CKAN_LANG')])
                 flash_success(tk._('You successfully closed app'))
                 tk.redirect_to(tk.url_for('apps_activity'))
             else:
@@ -149,7 +163,7 @@ class AppsController(BaseController):
                     app.save()
                     log.debug("App data is valid. Content: %s", do_striptags(app.name))
                     flash_success(tk._('You successfully create app'))
-                    jobs.enqueue(send_notifications_on_change_app_status, [app, 'pending'])
+                    jobs.enqueue(send_notifications_on_change_app_status, [app, 'pending', tk.request.environ.get('CKAN_LANG')])
                     tk.redirect_to(app.get_absolute_url())
             else:
                 flash_error(tk._('You have errors in form'))

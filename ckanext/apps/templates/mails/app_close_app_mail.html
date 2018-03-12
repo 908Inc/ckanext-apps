@@ -1,6 +1,7 @@
-{{ _('Hello!') }}
+{% trans %}Hello!{% endtrans %}
 
-{{ _('User') }} {{ author_name }}  {{ _('your app was rejected. See the reason in the The following message:') }}
+{% trans %}User{% endtrans %} {{ author_name }}  {% trans %}your app was rejected. See the reason in the The following
+    message:{% endtrans %}
 
 {{ closed_message }}
 
