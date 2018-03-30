@@ -214,7 +214,7 @@ class AppsController(BaseController):
         return self.__render('apps_index.html', context)
 
     def activity(self):
-        page = tk.request.GET.get('page', 1)
+        page = tk.request.GET.get('page', '1')
         if not page.isdigit():
             page = 1
         page = int(page)
