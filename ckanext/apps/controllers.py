@@ -139,7 +139,7 @@ class AppsController(BaseController):
 
     def app_add(self):
         if c.userobj is None:
-            tk.redirect_to(tk.url_for(controller='user', action='login'))
+            tk.redirect_to(tk.url_for(controller='user', action='login', came_from=tk.request.GET.get('came_from')))
         form = CreateAppForm(tk.request.POST)
         data_dict = clean_dict(dict_fns.unflatten(
             tuplize_dict(parse_params(tk.request.params))))
