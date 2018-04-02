@@ -10,7 +10,7 @@ import jinja2
 from babel.support import Translations
 from ckan.common import c
 from ckan.lib.base import BaseController, abort
-from ckan.lib.helpers import flash_success, flash_error
+from ckan.lib.helpers import flash_success, flash_error, full_current_url
 from ckan.plugins import toolkit as tk
 from jinja2.filters import do_striptags
 
@@ -139,7 +139,7 @@ class AppsController(BaseController):
 
     def app_add(self):
         if c.userobj is None:
-            tk.redirect_to(tk.url_for(controller='user', action='login'))
+            tk.redirect_to(tk.url_for(controller='user', action='login', came_from=full_current_url()))
         form = CreateAppForm(tk.request.POST)
         data_dict = clean_dict(dict_fns.unflatten(
             tuplize_dict(parse_params(tk.request.params))))
