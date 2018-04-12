@@ -2,53 +2,51 @@
 # Copyright (C) 2018 ORGANIZATION
 # This file is distributed under the same license as the ckanext-apps project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-apps 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-03-02 11:10+0000\n"
+"POT-Creation-Date: 2018-04-12 11:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.3\n"
+"Generated-By: Babel 2.3.4\n"
 
-#: ckanext/apps/controllers.py:37
-msgid "{0} app"
-msgstr ""
-
-#: ckanext/apps/controllers.py:83
+#: ckanext/apps/controllers.py:99
 msgid "You successfully closed app"
 msgstr ""
 
-#: ckanext/apps/controllers.py:86 ckanext/apps/controllers.py:150
-#: ckanext/apps/controllers.py:171
+#: ckanext/apps/controllers.py:102 ckanext/apps/controllers.py:169
+#: ckanext/apps/controllers.py:190
 msgid "You have errors in form"
 msgstr ""
 
-#: ckanext/apps/controllers.py:113
+#: ckanext/apps/controllers.py:129
 msgid "You can't set rank for your app"
 msgstr ""
 
-#: ckanext/apps/controllers.py:121
+#: ckanext/apps/controllers.py:137
 msgid "You successfully set rank {0}"
 msgstr ""
 
-#: ckanext/apps/controllers.py:146
+#: ckanext/apps/controllers.py:165
 msgid "You successfully create app"
 msgstr ""
 
-#: ckanext/apps/controllers.py:168
+#: ckanext/apps/controllers.py:187
 msgid "You successfully create thread"
 msgstr ""
 
-#: ckanext/apps/controllers.py:231
+#: ckanext/apps/controllers.py:260
 msgid "You successfully hided board"
 msgstr ""
 
-#: ckanext/apps/controllers.py:241
+#: ckanext/apps/controllers.py:270
 msgid "You successfully unhided board"
 msgstr ""
 
@@ -137,10 +135,6 @@ msgstr ""
 msgid "Logo"
 msgstr ""
 
-#: ckanext/apps/templates/create_app.html:60
-msgid "Please, upload the logo"
-msgstr ""
-
 #: ckanext/apps/templates/create_app.html:66
 msgid "Application's Description"
 msgstr ""
@@ -184,24 +178,18 @@ msgstr ""
 #: ckanext/apps/templates/mails/app_active_app_mail.html:1
 #: ckanext/apps/templates/mails/app_close_app_mail.html:1
 #: ckanext/apps/templates/mails/app_pending_app_mail.html:1
-msgid "Hello!"
+msgid "Hello"
 msgstr ""
 
-#: ckanext/apps/templates/mails/app_active_app_mail.html:3
-#: ckanext/apps/templates/mails/app_close_app_mail.html:3
-#: ckanext/apps/templates/mails/app_pending_app_mail.html:3
-msgid "User"
+#: ckanext/apps/templates/mails/app_active_app_mail.html:2
+msgid "Your app has been approved and published."
 msgstr ""
 
-#: ckanext/apps/templates/mails/app_active_app_mail.html:3
-msgid "your app was approved"
-msgstr ""
-
-#: ckanext/apps/templates/mails/app_close_app_mail.html:3
+#: ckanext/apps/templates/mails/app_close_app_mail.html:2
 msgid "your app was rejected. See the reason in the The following message:"
 msgstr ""
 
-#: ckanext/apps/templates/mails/app_pending_app_mail.html:3
-msgid "your app was created, and is pending for our approval"
+#: ckanext/apps/templates/mails/app_pending_app_mail.html:2
+msgid "You added the app, expect it to be published."
 msgstr ""
 
