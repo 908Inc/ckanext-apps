@@ -164,6 +164,7 @@ class AppsController(BaseController):
                     log.debug("App data is valid. Content: %s", do_striptags(app.name))
                     flash_success(tk._('You successfully create app'))
                     jobs.enqueue(send_notifications_on_change_app_status, [app, 'pending', tk.request.environ.get('CKAN_LANG')])
+                    print 'LANG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> {}'.format(tk.request.environ.get('CKAN_LANG'))
                     tk.redirect_to(app.get_absolute_url())
             else:
                 flash_error(tk._('You have errors in form'))
@@ -247,7 +248,7 @@ class AppsController(BaseController):
         app.closed_message = ""
         app.save()
         if app.status == 'active':
-            jobs.enqueue(send_notifications_on_change_app_status, [app, 'active'])
+            jobs.enqueue(send_notifications_on_change_app_status, [app, 'active', tk.request.environ.get('CKAN_LANG')])
         tk.redirect_to(tk.url_for('apps_activity'))
 
     def board_hide(self, slug):
