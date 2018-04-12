@@ -163,8 +163,8 @@ class AppsController(BaseController):
                     app.save()
                     log.debug("App data is valid. Content: %s", do_striptags(app.name))
                     flash_success(tk._('You successfully create app'))
-                    jobs.enqueue(send_notifications_on_change_app_status, [app, 'pending', tk.request.environ.get('CKAN_LANG')])
-                    print 'LANG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> {}'.format(tk.request.environ.get('CKAN_LANG'))
+                    jobs.enqueue(send_notifications_on_change_app_status, [app, 'pending',
+                                                                           tk.request.environ.get('CKAN_LANG')])
                     tk.redirect_to(app.get_absolute_url())
             else:
                 flash_error(tk._('You have errors in form'))
@@ -222,7 +222,8 @@ class AppsController(BaseController):
         total_pages = (App.all().count() - 1) / self.paginated_by + 1
         if not 1 < page <= total_pages:
             page = 1
-        apps_activity = App.all().order_by(App.created.desc()).offset((page - 1) * self.paginated_by).limit(self.paginated_by)
+        apps_activity = App.all().order_by(App.created.desc()).offset((page - 1) * self.paginated_by)\
+            .limit(self.paginated_by)
         activity = [dict(id=i.id,
                          url=i.get_absolute_url(),
                          content=i.content,
