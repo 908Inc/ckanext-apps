@@ -31,7 +31,7 @@ def send_notifications_on_change_app_status(app, status, lang):
     template_dir = os.path.join(os.path.dirname(__file__), 'templates')
     locale_dir = os.path.join(os.path.dirname(__file__), 'i18n')
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), extensions=['jinja2.ext.i18n'])
-    translations = Translations.load(locale_dir, [lang], domain='ckanext-forum')
+    translations = Translations.load(locale_dir, [lang], domain='ckanext-apps')
     env.install_gettext_translations(translations)
     env.globals['get_locale'] = lambda: lang
 
@@ -163,7 +163,8 @@ class AppsController(BaseController):
                     app.save()
                     log.debug("App data is valid. Content: %s", do_striptags(app.name))
                     flash_success(tk._('You successfully create app'))
-                    jobs.enqueue(send_notifications_on_change_app_status, [app, 'pending', tk.request.environ.get('CKAN_LANG')])
+                    jobs.enqueue(send_notifications_on_change_app_status, [app, 'pending',
+                                                                           tk.request.environ.get('CKAN_LANG')])
                     tk.redirect_to(app.get_absolute_url())
             else:
                 flash_error(tk._('You have errors in form'))
@@ -247,7 +248,7 @@ class AppsController(BaseController):
         app.closed_message = ""
         app.save()
         if app.status == 'active':
-            jobs.enqueue(send_notifications_on_change_app_status, [app, 'active'])
+            jobs.enqueue(send_notifications_on_change_app_status, [app, 'active', tk.request.environ.get('CKAN_LANG')])
         tk.redirect_to(tk.url_for('apps_activity'))
 
     def board_hide(self, slug):
