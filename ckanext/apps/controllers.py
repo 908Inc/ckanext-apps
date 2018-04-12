@@ -24,6 +24,13 @@ tuplize_dict = logic.tuplize_dict
 log = logging.getLogger(__name__)
 
 
+def do_if_user_not_sysadmin():
+    if not c.userobj:
+        tk.redirect_to(tk.url_for(controller='user', action='login', came_from=tk.request.path))
+    if not c.userobj.sysadmin:
+        abort(404)  # not 403 for security reasons
+
+
 def send_notifications_on_change_app_status(app, status, lang):
     """ Send mail when app changes status  """
     from ckan.model import User
@@ -215,6 +222,7 @@ class AppsController(BaseController):
         return self.__render('apps_index.html', context)
 
     def activity(self):
+        do_if_user_not_sysadmin()
         page = tk.request.GET.get('page', '1')
         if not page.isdigit():
             page = 1
