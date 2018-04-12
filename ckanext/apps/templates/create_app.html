@@ -53,12 +53,23 @@
                 {% endif %}
             </div>
 
-            <div class="form-group">
-                <label>{% trans %}Logo{% endtrans %}</label>
-                <div class="control-group control-full forum-title-group" style="display: block;">
+
+            <div class="form-group forum-title-group">
+                <div class="image-upload" data-module="image-upload" data-module-is_url="false" data-module-is_upload="false" data-module-field_url="image_url" data-module-field_upload="image_upload" data-module-field_clear="clear_upload" data-module-upload_label="{% trans %}Logo{% endtrans %}" data-module-field_name="image_url">
+                    <div class="control-group control-full" style="display: none;">
+                    <label class="control-label" for="field-image-url">{% trans %}Image URL{% endtrans %}</label>
                     <div class="controls ">
-                        <input id="field-image-upload" type="file" name="image_upload" value="" placeholder="" title="Upload a file on your computer" class="btn" style="width: 89px; display: block;">
+                        <a href="javascript:;" class="btn btn-danger btn-remove-url" title="Прибрати">{% trans %}Remove{% endtrans %}</a><input id="field-image-url" type="text" name="image_url" value="" placeholder="http://example.com/my-image.jpg">
                     </div>
+                    </div>
+
+                    <div class="control-group control-full" style="display: block;">
+                    <label class="control-label" for="field-image-upload">{% trans %}Logo{% endtrans %}</label>
+                    <div class="controls download-controls">    
+                    <input id="field-image-upload" type="file" name="image_upload" value="" placeholder="" title="{% trans %}Upload a file on your computer{% endtrans %}" style="width: 117px; display: block;">
+                    </div>
+                    </div>
+                    <input type="hidden" name="clear_upload">
                 </div>
             </div>
 
