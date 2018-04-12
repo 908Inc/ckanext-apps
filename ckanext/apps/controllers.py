@@ -222,8 +222,7 @@ class AppsController(BaseController):
         total_pages = (App.all().count() - 1) / self.paginated_by + 1
         if not 1 < page <= total_pages:
             page = 1
-        apps_activity = App.all().order_by(App.created.desc()).offset((page - 1) * self.paginated_by)\
-            .limit(self.paginated_by)
+        apps_activity = App.all().order_by(App.created.desc()).offset((page - 1) * self.paginated_by).limit(self.paginated_by)
         activity = [dict(id=i.id,
                          url=i.get_absolute_url(),
                          content=i.content,
