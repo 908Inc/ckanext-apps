@@ -31,7 +31,7 @@ def send_notifications_on_change_app_status(app, status, lang):
     template_dir = os.path.join(os.path.dirname(__file__), 'templates')
     locale_dir = os.path.join(os.path.dirname(__file__), 'i18n')
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), extensions=['jinja2.ext.i18n'])
-    translations = Translations.load(locale_dir, [lang], domain='ckanext-forum')
+    translations = Translations.load(locale_dir, [lang], domain='ckanext-apps')
     env.install_gettext_translations(translations)
     env.globals['get_locale'] = lambda: lang
 
