@@ -184,17 +184,17 @@ msgstr ""
 #: ckanext/apps/templates/mails/app_close_app_mail.html:1
 #: ckanext/apps/templates/mails/app_pending_app_mail.html:1
 msgid "Hello"
-msgstr "Здраствуйте"
+msgstr "Доброго дня!"
 
 #: ckanext/apps/templates/mails/app_active_app_mail.html:2
 msgid "Your app has been approved and published."
-msgstr "Ваше приложение одобрено и опубликовано."
+msgstr "Ваш додаток був опублікований"
 
 #: ckanext/apps/templates/mails/app_close_app_mail.html:2
 msgid "your app was rejected. See the reason in the The following message:"
-msgstr "Ваше приложение было отклонено. Причина в сообщении ниже:"
+msgstr "Ваш додаток був скритий адміністратором. Причина:"
 
 #: ckanext/apps/templates/mails/app_pending_app_mail.html:2
 msgid "You added the app, expect it to be published."
-msgstr "Ва добавили приложение. Ожидайте публикации."
+msgstr "Ви успішно додали додаток. Очікуйте будь ласка підтверження адміністратором"
 
