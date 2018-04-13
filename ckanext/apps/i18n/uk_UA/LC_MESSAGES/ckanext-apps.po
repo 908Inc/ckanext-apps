@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-apps 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-13 09:42+0000\n"
+"POT-Creation-Date: 2018-04-13 10:05+0000\n"
 "PO-Revision-Date: 2018-03-02 11:11+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk_UA\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Generated-By: Babel 2.3.4\n"
 
 #: ckanext/apps/controllers.py:53
-msgid "You added an application "
+msgid "You added an application"
 msgstr "Вы разместили приложение"
 
 #: ckanext/apps/controllers.py:55
@@ -216,6 +216,7 @@ msgid "Your app has been approved and published."
 msgstr "Ваш додаток був опублікований"
 
 #: ckanext/apps/templates/mails/app_close_app_mail.html:2
+#, fuzzy
 msgid "your app was rejected. See the reason in the The following message:"
 msgstr "Ваш додаток був скритий адміністратором. Причина:"
 

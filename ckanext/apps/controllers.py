@@ -50,7 +50,7 @@ def send_notifications_on_change_app_status(app, status, lang):
         data['closed_message'] = app.closed_message
     body = template.render(data)
     if status == 'pending':
-        subject = env.globals['gettext'](tk._('You added an application '))
+        subject = env.globals['gettext'](tk._('You added an application'))
     if status == 'active':
         subject = env.globals['gettext'](tk._('Your application has been approved'))
     if status == 'close':
