@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the ckanext-apps project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
 #
-
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-apps 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-12 11:37+0000\n"
+"POT-Creation-Date: 2018-04-13 04:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,36 +17,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/apps/controllers.py:99
+#: ckanext/apps/controllers.py:106
 msgid "You successfully closed app"
 msgstr ""
 
-#: ckanext/apps/controllers.py:102 ckanext/apps/controllers.py:169
-#: ckanext/apps/controllers.py:190
+#: ckanext/apps/controllers.py:109 ckanext/apps/controllers.py:177
+#: ckanext/apps/controllers.py:198
 msgid "You have errors in form"
 msgstr ""
 
-#: ckanext/apps/controllers.py:129
+#: ckanext/apps/controllers.py:136
 msgid "You can't set rank for your app"
 msgstr ""
 
-#: ckanext/apps/controllers.py:137
+#: ckanext/apps/controllers.py:144
 msgid "You successfully set rank {0}"
 msgstr ""
 
-#: ckanext/apps/controllers.py:165
+#: ckanext/apps/controllers.py:172
 msgid "You successfully create app"
 msgstr ""
 
-#: ckanext/apps/controllers.py:187
+#: ckanext/apps/controllers.py:195
 msgid "You successfully create thread"
 msgstr ""
 
-#: ckanext/apps/controllers.py:260
+#: ckanext/apps/controllers.py:269
 msgid "You successfully hided board"
 msgstr ""
 
-#: ckanext/apps/controllers.py:270
+#: ckanext/apps/controllers.py:279
 msgid "You successfully unhided board"
 msgstr ""
 
@@ -131,23 +131,36 @@ msgstr ""
 msgid "Please provide the link"
 msgstr ""
 
-#: ckanext/apps/templates/create_app.html:57
+#: ckanext/apps/templates/create_app.html:58
+#: ckanext/apps/templates/create_app.html:67
 msgid "Logo"
 msgstr ""
 
-#: ckanext/apps/templates/create_app.html:66
+#: ckanext/apps/templates/create_app.html:60
+msgid "Image URL"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:62
+msgid "Remove"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:69
+msgid "Upload a file on your computer"
+msgstr ""
+
+#: ckanext/apps/templates/create_app.html:77
 msgid "Application's Description"
 msgstr ""
 
-#: ckanext/apps/templates/create_app.html:68
+#: ckanext/apps/templates/create_app.html:79
 msgid "Please fill out the description field"
 msgstr ""
 
-#: ckanext/apps/templates/create_app.html:80
+#: ckanext/apps/templates/create_app.html:91
 msgid "You can use Markdown formatting here"
 msgstr ""
 
-#: ckanext/apps/templates/create_app.html:82
+#: ckanext/apps/templates/create_app.html:93
 msgid "Create"
 msgstr ""
 
