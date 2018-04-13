@@ -49,9 +49,15 @@ def send_notifications_on_change_app_status(app, status, lang):
     if status == 'close':
         data['closed_message'] = app.closed_message
     body = template.render(data)
+    if status == 'pending':
+        subject = env.globals['gettext'](tk._('You added an application '))
+    if status == 'active':
+        subject = env.globals['gettext'](tk._('Your application has been approved'))
+    if status == 'close':
+        subject = env.globals['gettext'](tk._('Your application has been rejected'))
     tk.get_action('send_mail')({}, {
         'to': app_author.email,
-        'subject': env.globals['gettext']('{0} app'.format(status)),
+        'subject': subject,
         'message_html': body
     })
 

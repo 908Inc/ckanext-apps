@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-apps 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-13 04:45+0000\n"
+"POT-Creation-Date: 2018-04-13 09:42+0000\n"
 "PO-Revision-Date: 2018-03-02 11:11+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk_UA\n"
@@ -20,36 +20,48 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/apps/controllers.py:106
+#: ckanext/apps/controllers.py:53
+msgid "You added an application "
+msgstr "Вы разместили приложение"
+
+#: ckanext/apps/controllers.py:55
+msgid "Your application has been approved"
+msgstr "Ваш додаток був опублікований"
+
+#: ckanext/apps/controllers.py:57
+msgid "Your application has been rejected"
+msgstr "Ваше приложение отклонено"
+
+#: ckanext/apps/controllers.py:112
 msgid "You successfully closed app"
 msgstr "Ви закрили додаток"
 
-#: ckanext/apps/controllers.py:109 ckanext/apps/controllers.py:177
-#: ckanext/apps/controllers.py:198
+#: ckanext/apps/controllers.py:115 ckanext/apps/controllers.py:183
+#: ckanext/apps/controllers.py:204
 msgid "You have errors in form"
 msgstr "Помилки у формі"
 
-#: ckanext/apps/controllers.py:136
+#: ckanext/apps/controllers.py:142
 msgid "You can't set rank for your app"
 msgstr "Неможливо голосувати за свій додаток"
 
-#: ckanext/apps/controllers.py:144
+#: ckanext/apps/controllers.py:150
 msgid "You successfully set rank {0}"
 msgstr "Ви проголосували {0}"
 
-#: ckanext/apps/controllers.py:172
+#: ckanext/apps/controllers.py:178
 msgid "You successfully create app"
 msgstr "Ви успішно зареєстрували додаток. Після перевірки він буде опублікований."
 
-#: ckanext/apps/controllers.py:195
+#: ckanext/apps/controllers.py:201
 msgid "You successfully create thread"
 msgstr "Ви успішно створили тему"
 
-#: ckanext/apps/controllers.py:269
+#: ckanext/apps/controllers.py:275
 msgid "You successfully hided board"
 msgstr "Ви успішно закрили розділ"
 
-#: ckanext/apps/controllers.py:279
+#: ckanext/apps/controllers.py:285
 msgid "You successfully unhided board"
 msgstr "Ви успішно відкрили розділ"
 
