@@ -216,7 +216,6 @@ msgid "Your app has been approved and published."
 msgstr "Ваш додаток був опублікований"
 
 #: ckanext/apps/templates/mails/app_close_app_mail.html:2
-#, fuzzy
 msgid "your app was rejected. See the reason in the The following message:"
 msgstr "Ваш додаток був скритий адміністратором. Причина:"
 
