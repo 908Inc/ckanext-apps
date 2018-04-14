@@ -51,10 +51,12 @@ def send_notifications_on_change_app_status(app, status, lang):
     body = template.render(data)
     if status == 'pending':
         subject = tk._('You added an application')
-    if status == 'active':
+    elif status == 'active':
         subject = tk._('Your application has been approved')
-    if status == 'close':
+    elif status == 'close':
         subject = tk._('Your application has been rejected')
+    else:
+        subject = status
     tk.get_action('send_mail')({}, {
         'to': app_author.email,
         'subject': env.globals['gettext'](subject),
