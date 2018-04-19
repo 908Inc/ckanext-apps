@@ -1,6 +1,6 @@
 {% extends "apps_base.html" %}
 
-{% block title %}{% trans %}Activity{% endtrans %} - {% trans %}Applications{% endtrans %} | Data.gov.ua {% endblock %}
+{% block title %}{% trans %}Activity{% endtrans %} {{ g.template_title_deliminater }} {% trans %}Applications{% endtrans %} {{ g.template_title_deliminater }} {{ g.site_title }}{% endblock %}
 
 {% block primary_content %}
     <h1 class="page-heading">{{ _('Activity') }}</h1>
