@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-apps 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-13 10:05+0000\n"
+"POT-Creation-Date: 2018-05-10 15:46+0000\n"
 "PO-Revision-Date: 2018-03-02 11:11+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk_UA\n"
@@ -32,36 +32,36 @@ msgstr "Ваш додаток був опублікований"
 msgid "Your application has been rejected"
 msgstr "Ваше приложение отклонено"
 
-#: ckanext/apps/controllers.py:112
+#: ckanext/apps/controllers.py:114
 msgid "You successfully closed app"
 msgstr "Ви закрили додаток"
 
-#: ckanext/apps/controllers.py:115 ckanext/apps/controllers.py:183
-#: ckanext/apps/controllers.py:204
+#: ckanext/apps/controllers.py:117 ckanext/apps/controllers.py:185
+#: ckanext/apps/controllers.py:206
 msgid "You have errors in form"
 msgstr "Помилки у формі"
 
-#: ckanext/apps/controllers.py:142
+#: ckanext/apps/controllers.py:144
 msgid "You can't set rank for your app"
 msgstr "Неможливо голосувати за свій додаток"
 
-#: ckanext/apps/controllers.py:150
+#: ckanext/apps/controllers.py:152
 msgid "You successfully set rank {0}"
 msgstr "Ви проголосували {0}"
 
-#: ckanext/apps/controllers.py:178
+#: ckanext/apps/controllers.py:180
 msgid "You successfully create app"
 msgstr "Ви успішно зареєстрували додаток. Після перевірки він буде опублікований."
 
-#: ckanext/apps/controllers.py:201
+#: ckanext/apps/controllers.py:203
 msgid "You successfully create thread"
 msgstr "Ви успішно створили тему"
 
-#: ckanext/apps/controllers.py:275
+#: ckanext/apps/controllers.py:277
 msgid "You successfully hided board"
 msgstr "Ви успішно закрили розділ"
 
-#: ckanext/apps/controllers.py:285
+#: ckanext/apps/controllers.py:287
 msgid "You successfully unhided board"
 msgstr "Ви успішно відкрили розділ"
 
@@ -93,7 +93,7 @@ msgstr "Створити розділ"
 
 #: ckanext/apps/templates/apps_base.html:23
 msgid "All Applications"
-msgstr "Всі додатки"
+msgstr "Усі додатки"
 
 #: ckanext/apps/templates/apps_base.html:30
 msgid "Choose a Section"

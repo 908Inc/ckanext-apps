@@ -3,11 +3,12 @@
 # This file is distributed under the same license as the ckanext-apps project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-apps 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-13 10:05+0000\n"
+"POT-Creation-Date: 2018-05-10 15:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,36 +29,36 @@ msgstr ""
 msgid "Your application has been rejected"
 msgstr ""
 
-#: ckanext/apps/controllers.py:112
+#: ckanext/apps/controllers.py:114
 msgid "You successfully closed app"
 msgstr ""
 
-#: ckanext/apps/controllers.py:115 ckanext/apps/controllers.py:183
-#: ckanext/apps/controllers.py:204
+#: ckanext/apps/controllers.py:117 ckanext/apps/controllers.py:185
+#: ckanext/apps/controllers.py:206
 msgid "You have errors in form"
 msgstr ""
 
-#: ckanext/apps/controllers.py:142
+#: ckanext/apps/controllers.py:144
 msgid "You can't set rank for your app"
 msgstr ""
 
-#: ckanext/apps/controllers.py:150
+#: ckanext/apps/controllers.py:152
 msgid "You successfully set rank {0}"
 msgstr ""
 
-#: ckanext/apps/controllers.py:178
+#: ckanext/apps/controllers.py:180
 msgid "You successfully create app"
 msgstr ""
 
-#: ckanext/apps/controllers.py:201
+#: ckanext/apps/controllers.py:203
 msgid "You successfully create thread"
 msgstr ""
 
-#: ckanext/apps/controllers.py:275
+#: ckanext/apps/controllers.py:277
 msgid "You successfully hided board"
 msgstr ""
 
-#: ckanext/apps/controllers.py:285
+#: ckanext/apps/controllers.py:287
 msgid "You successfully unhided board"
 msgstr ""
 
