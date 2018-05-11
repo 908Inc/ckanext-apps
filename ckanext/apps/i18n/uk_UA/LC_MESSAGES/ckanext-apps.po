@@ -155,7 +155,7 @@ msgstr "Лого"
 
 #: ckanext/apps/templates/create_app.html:60
 msgid "Image URL"
-msgstr "Посилання"
+msgstr "Посилання на зображення"
 
 #: ckanext/apps/templates/create_app.html:62
 msgid "Remove"
