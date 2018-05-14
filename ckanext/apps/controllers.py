@@ -43,8 +43,12 @@ def send_notifications_on_change_app_status(app, status, lang):
     env.globals['get_locale'] = lambda: lang
 
     app_author = User.get(app.author_id)
-    data = {'author_name': app_author.name}
-    template_name = 'mails/app_{0}_app_mail.html'.format(status)
+    data = {
+        'author_name': app_author.name,
+        'site_title': tk.config.get('ckan.site_title'),
+        'site_url': tk.config.get('ckan.site_url')
+    }
+    template_name = 'email/app_{0}_app_mail.html'.format(status)
     template = env.get_template(template_name)
     if status == 'close':
         data['closed_message'] = app.closed_message

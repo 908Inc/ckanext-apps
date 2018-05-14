@@ -1,0 +1,9 @@
+{% extends 'email/base.html' %}
+
+{% block main_content %}
+
+<p>{% trans %}your app was rejected. See the reason in the The following message:{% endtrans %}</p>
+
+<p>{{ closed_message }}</p>
+
+{% endblock %}
