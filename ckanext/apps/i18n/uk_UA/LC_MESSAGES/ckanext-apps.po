@@ -220,7 +220,7 @@ msgstr "Посилання на зображення"
 
 #: ckanext/apps/templates/create_app.html:62
 msgid "Remove"
-msgstr "Забрати"
+msgstr "Прибрати"
 
 
 
