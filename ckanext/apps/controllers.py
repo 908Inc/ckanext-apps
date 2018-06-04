@@ -101,6 +101,30 @@ class AppsController(BaseController):
         }
         log.debug('AppsController.index context: %s', context)
         return self.__render('apps_index.html', context)
+    # def index(self):
+    #     print 'INDEx'
+    #     page = get_page_number(tk.request.params)
+    #     total_rows = App.all_active().count()
+    #     total_pages = (total_rows - 1) / self.paginated_by + 1
+    #     if not 1 < page <= total_pages:
+    #         page = 1
+    #     apps_list = tk.get_action('apps_active_apps')(data_dict={"page": page, "paginated_by": self.paginated_by})
+    #     c.page = Page(
+    #         collection=apps_list.all(),
+    #         page=page,
+    #         item_count=total_rows,
+    #         items_per_page=self.paginated_by
+    #     )
+    #     print 'PAGER: {}'.format(c.page)
+    #     context = {
+    #         'apps_list': tk.get_action('apps_active_apps')(
+    #             data_dict={"page": page, "paginated_by": self.paginated_by}
+    #         ),
+    #         'total_pages': total_pages,
+    #         'current_page': page,
+    #     }
+    #     log.debug('AppsController.index context: %s', context)
+    #     return self.__render('apps_index.html', context)
 
     def close_app(self, id):
         if c.userobj is None or not c.userobj.sysadmin:
@@ -221,16 +245,22 @@ class AppsController(BaseController):
         board = Board.get_by_slug(slug)
         if not board:
             abort(404)
-        page = int(tk.request.GET.get('page', '1'))
-        total_pages = int(App.filter_board(board_slug=board.slug).count() / self.paginated_by) + 1
+        page = get_page_number(tk.request.params)
+        total_rows = App.filter_board(board_slug=board.slug).count()
+        total_pages = int(total_rows / self.paginated_by) + 1
         if not 1 < page <= total_pages:
             page = 1
+        apps_list =  App.filter_board(board_slug=board.slug).offset((page - 1) * self.paginated_by).limit(
+            self.paginated_by)
+        c.page = Page(
+            collection=apps_list,
+            page=page,
+            item_count=total_rows,
+            items_per_page=self.paginated_by
+        )
         context = {
             'board': board,
-            'apps_list': App.filter_board(board_slug=board.slug).offset((page - 1) * self.paginated_by).limit(
-                self.paginated_by),
-            'total_pages': total_pages,
-            'current_page': page,
+            'apps_list': apps_list,
         }
         log.debug('AppController.board_show context: %s', context)
         return self.__render('apps_index.html', context)
