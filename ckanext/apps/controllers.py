@@ -69,7 +69,7 @@ def send_notifications_on_change_app_status(app, status, lang):
 
 
 class AppsController(BaseController):
-    paginated_by = 20
+    paginated_by = 10
 
     def __render(self, template_name, context):
         if c.userobj is None or not c.userobj.sysadmin:
