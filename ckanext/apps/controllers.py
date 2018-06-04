@@ -10,7 +10,7 @@ import jinja2
 from babel.support import Translations
 from ckan.common import c
 from ckan.lib.base import BaseController, abort
-from ckan.lib.helpers import flash_success, flash_error, full_current_url
+from ckan.lib.helpers import flash_success, flash_error, full_current_url, get_page_number, Page
 from ckan.plugins import toolkit as tk
 from jinja2.filters import do_striptags
 
@@ -69,7 +69,7 @@ def send_notifications_on_change_app_status(app, status, lang):
 
 
 class AppsController(BaseController):
-    paginated_by = 10
+    paginated_by = 20
 
     def __render(self, template_name, context):
         if c.userobj is None or not c.userobj.sysadmin:
@@ -83,19 +83,21 @@ class AppsController(BaseController):
         return tk.render(template_name, context)
 
     def index(self):
-        page = tk.request.GET.get('page', '1')
-        if not page.isdigit():
-            page = 1
-        page = int(page)
-        total_pages = (App.all_active().count() - 1) / self.paginated_by + 1
+        page = get_page_number(tk.request.params)
+        total_rows = App.all_active().count()
+        total_pages = (total_rows - 1) / self.paginated_by + 1
         if not 1 < page <= total_pages:
             page = 1
+
+        apps_list = tk.get_action('apps_active_apps')(data_dict={"page": page, "paginated_by": self.paginated_by})
+        c.page = Page(
+            collection=apps_list,
+            page=page,
+            item_count=total_rows,
+            items_per_page=self.paginated_by
+        )
         context = {
-            'apps_list': tk.get_action('apps_active_apps')(
-                data_dict={"page": page, "paginated_by": self.paginated_by}
-            ),
-            'total_pages': total_pages,
-            'current_page': page,
+            'apps_list': apps_list,
         }
         log.debug('AppsController.index context: %s', context)
         return self.__render('apps_index.html', context)
@@ -235,11 +237,9 @@ class AppsController(BaseController):
 
     def activity(self):
         do_if_user_not_sysadmin()
-        page = tk.request.GET.get('page', '1')
-        if not page.isdigit():
-            page = 1
-        page = int(page)
-        total_pages = (App.all().count() - 1) / self.paginated_by + 1
+        page = get_page_number(tk.request.params)
+        total_rows = App.all().count()
+        total_pages = (total_rows - 1) / self.paginated_by + 1
         if not 1 < page <= total_pages:
             page = 1
         apps_activity = App.all().order_by(App.created.desc()).offset((page - 1) * self.paginated_by).limit(self.paginated_by)
@@ -250,11 +250,15 @@ class AppsController(BaseController):
                          status=i.status,
                          author_name=i.author.name,
                          created=i.created) for i in apps_activity]
+        c.page = Page(
+            collection=apps_activity,
+            page=page,
+            item_count=total_rows,
+            items_per_page=self.paginated_by
+        )
         context = {
             'activity': sorted(activity, key=itemgetter('created'), reverse=True),
             'statuses': ["active", "pending", "close"],
-            'total_pages': total_pages,
-            'current_page': page
         }
         return self.__render('apps_activity.html', context)
 
