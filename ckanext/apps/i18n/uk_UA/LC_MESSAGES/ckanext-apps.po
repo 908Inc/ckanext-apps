@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-apps 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-05-10 15:46+0000\n"
+"POT-Creation-Date: 2018-06-04 17:56+0000\n"
 "PO-Revision-Date: 2018-03-02 11:11+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk_UA\n"
@@ -18,83 +18,58 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
+"Generated-By: Babel 2.5.3\n"
 
-
-#: ckanext/apps/controllers.py:53
+#: ckanext/apps/controllers.py:57
 msgid "You added an application"
 msgstr "Ви додали додаток"
 
-
-
-#: ckanext/apps/controllers.py:55
+#: ckanext/apps/controllers.py:59
 msgid "Your application has been approved"
 msgstr "Ваш додаток був опублікований"
 
-
-
-#: ckanext/apps/controllers.py:57
+#: ckanext/apps/controllers.py:61
 msgid "Your application has been rejected"
 msgstr "Ваш додаток відхилено"
 
-
-
-#: ckanext/apps/controllers.py:114
+#: ckanext/apps/controllers.py:118
 msgid "You successfully closed app"
 msgstr "Ви успішно закрили додаток"
 
-
-
-#: ckanext/apps/controllers.py:117 ckanext/apps/controllers.py:185
-#: ckanext/apps/controllers.py:206
+#: ckanext/apps/controllers.py:121 ckanext/apps/controllers.py:189
+#: ckanext/apps/controllers.py:210
 msgid "You have errors in form"
 msgstr "У формі є помилки"
 
-
-
-#: ckanext/apps/controllers.py:144
+#: ckanext/apps/controllers.py:148
 msgid "You can't set rank for your app"
 msgstr "Неможливо голосувати за свій власний додаток"
 
-
-
-#: ckanext/apps/controllers.py:152
+#: ckanext/apps/controllers.py:156
 msgid "You successfully set rank {0}"
 msgstr "Ви проголосували {0}"
 
-
-
-#: ckanext/apps/controllers.py:180
+#: ckanext/apps/controllers.py:184
 msgid "You successfully create app"
 msgstr "Ви успішно зареєстрували додаток. Після перевірки він буде опублікований."
 
-
-
-#: ckanext/apps/controllers.py:203
+#: ckanext/apps/controllers.py:207
 msgid "You successfully create thread"
 msgstr "Ви успішно створили тему"
 
-
-
-#: ckanext/apps/controllers.py:277
+#: ckanext/apps/controllers.py:281
 msgid "You successfully hided board"
 msgstr "Ви успішно закрили розділ"
 
-
-
-#: ckanext/apps/controllers.py:287
+#: ckanext/apps/controllers.py:291
 msgid "You successfully unhided board"
 msgstr "Ви успішно відкрили розділ"
-
-
 
 #: ckanext/apps/templates/apps_activity.html:3
 #: ckanext/apps/templates/apps_activity.html:6
 #: ckanext/apps/templates/apps_base.html:27
 msgid "Activity"
 msgstr "Активність"
-
-
 
 #: ckanext/apps/templates/apps_activity.html:3
 #: ckanext/apps/templates/apps_index.html:3
@@ -106,13 +81,9 @@ msgstr "Активність"
 msgid "Applications"
 msgstr "Додатки"
 
-
-
 #: ckanext/apps/templates/apps_base.html:8
 msgid "Create Application"
 msgstr "Створити додаток"
-
-
 
 #: ckanext/apps/templates/apps_base.html:15
 #: ckanext/apps/templates/create_app_board.html:3
@@ -120,19 +91,13 @@ msgstr "Створити додаток"
 msgid "Create Section"
 msgstr "Створити розділ"
 
-
-
 #: ckanext/apps/templates/apps_base.html:23
 msgid "All Applications"
 msgstr "Усі додатки"
 
-
-
 #: ckanext/apps/templates/apps_base.html:30
 msgid "Choose a Section"
 msgstr "Виберіть розділ"
-
-
 
 #: ckanext/apps/templates/close_app.html:3
 #: ckanext/apps/templates/close_app.html:7
@@ -140,178 +105,128 @@ msgstr "Виберіть розділ"
 msgid "Reject the Application"
 msgstr "Відхилити додаток"
 
-
-
 #: ckanext/apps/templates/close_app.html:13
 msgid "Comment"
 msgstr "Коментар"
 
-
-
 #: ckanext/apps/templates/close_app.html:15
 msgid "You can attach a message regarding the application before rejecting it"
 msgstr "Попередньо ви можете додати пояснення причини відмови від додатку"
-
-
 
 #: ckanext/apps/templates/create_app.html:3
 #: ckanext/apps/templates/create_app.html:7
 msgid "Create an Application"
 msgstr "Створити додаток"
 
-
-
 #: ckanext/apps/templates/create_app.html:13
 msgid "Select a Section"
 msgstr "Виберіть розділ"
-
-
 
 #: ckanext/apps/templates/create_app.html:14
 msgid "The section is not selected"
 msgstr "Розділ не вибрано"
 
-
-
 #: ckanext/apps/templates/create_app.html:15
 msgid "Please select the section"
 msgstr "Будь ласка, виберіть розділ"
-
-
 
 #: ckanext/apps/templates/create_app.html:31
 #: ckanext/apps/templates/create_app_board.html:13
 msgid "Provide a Title"
 msgstr "Назва"
 
-
-
 #: ckanext/apps/templates/create_app.html:33
 #: ckanext/apps/templates/create_app_board.html:15
 msgid "Please fill out the title field"
 msgstr "Будь ласка, вкажіть назву"
 
-
-
 #: ckanext/apps/templates/create_app.html:44
 msgid "Link to the Application"
 msgstr "Посилання на додаток"
 
-
-
 #: ckanext/apps/templates/create_app.html:46
 msgid "Please provide the link"
 msgstr "Будь ласка, вкажіть посилання"
-
-
 
 #: ckanext/apps/templates/create_app.html:58
 #: ckanext/apps/templates/create_app.html:67
 msgid "Logo"
 msgstr "Лого"
 
-
-
 #: ckanext/apps/templates/create_app.html:60
 msgid "Image URL"
 msgstr "Посилання на зображення"
-
-
 
 #: ckanext/apps/templates/create_app.html:62
 msgid "Remove"
 msgstr "Прибрати"
 
-
-
 #: ckanext/apps/templates/create_app.html:69
 msgid "Upload a file on your computer"
 msgstr "Завантажити"
-
-
 
 #: ckanext/apps/templates/create_app.html:77
 msgid "Application's Description"
 msgstr "Опис додатку"
 
-
-
 #: ckanext/apps/templates/create_app.html:79
 msgid "Please fill out the description field"
 msgstr "Будь ласка, внесіть опис"
-
-
 
 #: ckanext/apps/templates/create_app.html:91
 msgid "You can use Markdown formatting here"
 msgstr "Можна використовувати форматування маркдаун"
 
-
-
 #: ckanext/apps/templates/create_app.html:93
 msgid "Create"
 msgstr "Створити"
-
-
 
 #: ckanext/apps/templates/create_app_board.html:26
 msgid "Slug"
 msgstr "Посилання"
 
-
-
 #: ckanext/apps/templates/create_app_board.html:27
 msgid "Only latin characters, digits and a hyphen"
 msgstr "Тільки латиниця, цифри та дефіс"
-
-
 
 #: ckanext/apps/templates/create_app_board.html:28
 msgid "Please provide the slug"
 msgstr "Будь ласка, вкажіть посилання"
 
-
-
 #: ckanext/apps/templates/create_app_board.html:40
 msgid "Publish"
 msgstr "Опублікувати"
-
-
 
 #: ckanext/apps/templates/show_app.html:20
 msgid "Rating"
 msgstr "Рейтинг"
 
-
-
 #: ckanext/apps/templates/show_app.html:35
 msgid "Go to Application"
 msgstr "Перейти до додатку"
 
-
-
-#: ckanext/apps/templates/mails/app_active_app_mail.html:1
-#: ckanext/apps/templates/mails/app_close_app_mail.html:1
-#: ckanext/apps/templates/mails/app_pending_app_mail.html:1
-msgid "Hello"
-msgstr "Доброго дня!"
-
-
-
-#: ckanext/apps/templates/mails/app_active_app_mail.html:2
+#: ckanext/apps/templates/email/app_active_app_mail.html:5
 msgid "Your app has been approved and published."
 msgstr "Ваш додаток був прийнятий та опублікований."
 
-
-
-#: ckanext/apps/templates/mails/app_close_app_mail.html:2
+#: ckanext/apps/templates/email/app_close_app_mail.html:5
 msgid "your app was rejected. See the reason in the The following message:"
 msgstr "Ваш додаток приховано адміністратором. Причина:"
 
-
-
-#: ckanext/apps/templates/mails/app_pending_app_mail.html:2
+#: ckanext/apps/templates/email/app_pending_app_mail.html:5
 msgid "You added the app, expect it to be published."
 msgstr ""
-"Ви успішно додали додаток. Очікуйте, будь ласка, підтвердження"
-"адміністратором"
+"Ви успішно додали додаток. Очікуйте, будь ласка, "
+"підтвердженняадміністратором"
+
+#: ckanext/apps/templates/email/base.html:1
+msgid "Dear"
+msgstr "Дорогий"
+
+#: ckanext/apps/templates/email/base.html:6
+msgid "Have a nice day."
+msgstr "Доброго дня"
+
+#: ckanext/apps/templates/email/base.html:10
+msgid "Message sent by"
+msgstr "Відправлено"
