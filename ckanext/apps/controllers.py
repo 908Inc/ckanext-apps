@@ -10,7 +10,7 @@ import jinja2
 from babel.support import Translations
 from ckan.common import c
 from ckan.lib.base import BaseController, abort
-from ckan.lib.helpers import flash_success, flash_error, full_current_url, get_page_number, Page
+from ckan.lib.helpers import flash_success, flash_error, full_current_url, get_page_number, Page, redirect_to
 from ckan.plugins import toolkit as tk
 from jinja2.filters import do_striptags
 
@@ -86,8 +86,9 @@ class AppsController(BaseController):
         page = get_page_number(tk.request.params)
         total_rows = App.all_active().count()
         total_pages = (total_rows - 1) / self.paginated_by + 1
-        if not 1 < page <= total_pages:
-            page = 1
+        # redirect for delete page parameter reason
+        if not 0 < page <= total_pages:
+            redirect_to('apps_index')
 
         apps_list = tk.get_action('apps_active_apps')(data_dict={"page": page, "paginated_by": self.paginated_by})
         c.page = Page(
@@ -224,8 +225,9 @@ class AppsController(BaseController):
         page = get_page_number(tk.request.params)
         total_rows = App.filter_board(board_slug=board.slug).count()
         total_pages = int(total_rows / self.paginated_by) + 1
-        if not 1 < page <= total_pages:
-            page = 1
+        # redirect for delete page parameter reason
+        if not 0 < page <= total_pages:
+            redirect_to('apps_index')
         apps_list =  App.filter_board(board_slug=board.slug).offset((page - 1) * self.paginated_by).limit(
             self.paginated_by)
         c.page = Page(
@@ -246,8 +248,9 @@ class AppsController(BaseController):
         page = get_page_number(tk.request.params)
         total_rows = App.all().count()
         total_pages = (total_rows - 1) / self.paginated_by + 1
-        if not 1 < page <= total_pages:
-            page = 1
+        # redirect for delete page parameter reason
+        if not 0 < page <= total_pages:
+            redirect_to('apps_activity')
         apps_activity = App.all().order_by(App.created.desc()).offset((page - 1) * self.paginated_by).limit(self.paginated_by)
         activity = [dict(id=i.id,
                          url=i.get_absolute_url(),
