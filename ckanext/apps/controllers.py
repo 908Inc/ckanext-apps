@@ -85,7 +85,7 @@ class AppsController(BaseController):
     def index(self):
         page = get_page_number(tk.request.params)
         total_rows = App.all_active().count()
-        total_pages = (total_rows - 1) / self.paginated_by + 1
+        total_pages = ((total_rows - 1) / self.paginated_by + 1) or 1
         # redirect for delete page parameter reason
         if not 0 < page <= total_pages:
             redirect_to('apps_index')
@@ -224,7 +224,7 @@ class AppsController(BaseController):
             abort(404)
         page = get_page_number(tk.request.params)
         total_rows = App.filter_board(board_slug=board.slug).count()
-        total_pages = int(total_rows / self.paginated_by) + 1
+        total_pages = (total_rows / self.paginated_by + 1) or 1
         # redirect for delete page parameter reason
         if not 0 < page <= total_pages:
             redirect_to('apps_index')
@@ -247,7 +247,7 @@ class AppsController(BaseController):
         do_if_user_not_sysadmin()
         page = get_page_number(tk.request.params)
         total_rows = App.all().count()
-        total_pages = (total_rows - 1) / self.paginated_by + 1
+        total_pages = ((total_rows - 1) / self.paginated_by + 1) or 1
         # redirect for delete page parameter reason
         if not 0 < page <= total_pages:
             redirect_to('apps_activity')
