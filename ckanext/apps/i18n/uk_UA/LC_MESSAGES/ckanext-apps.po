@@ -217,7 +217,7 @@ msgstr "Ваш додаток приховано адміністратором.
 msgid "You added the app, expect it to be published."
 msgstr ""
 "Ви успішно додали додаток. Очікуйте, будь ласка, "
-"підтвердженняадміністратором"
+"підтвердження адміністратором"
 
 #: ckanext/apps/templates/email/base.html:1
 msgid "Dear"
