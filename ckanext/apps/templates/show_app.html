@@ -8,9 +8,7 @@
     <div class="app-head">
       <div class="app-meta">
         <div class="media-left pull-left app-avatar">
-          <a href="#">
             <div class="image" style="background-image:url({{ h.url_for_static('/uploads/apps/'+app.image_url) if app.image_url else h.url_for_static('/images/app-default-logo.png') }})"></div>
-          </a>
         </div>
         <div class="media-body app-thread-body">
           <h2 class="thread-heading">{{ app.name }}</h2>
