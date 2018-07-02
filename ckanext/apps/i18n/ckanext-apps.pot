@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-apps 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-06-04 17:56+0000\n"
+"POT-Creation-Date: 2018-07-02 07:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,48 +17,61 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.3\n"
 
-#: ckanext/apps/controllers.py:57
+#: ckanext/apps/controllers.py:28
+msgid "active"
+msgstr ""
+
+#: ckanext/apps/controllers.py:29
+msgid "pending"
+msgstr ""
+
+#: ckanext/apps/controllers.py:30
+msgid "close"
+msgstr ""
+
+#: ckanext/apps/controllers.py:64
 msgid "You added an application"
 msgstr ""
 
-#: ckanext/apps/controllers.py:59
+#: ckanext/apps/controllers.py:66
 msgid "Your application has been approved"
 msgstr ""
 
-#: ckanext/apps/controllers.py:61
+#: ckanext/apps/controllers.py:68
 msgid "Your application has been rejected"
 msgstr ""
 
-#: ckanext/apps/controllers.py:118
+#: ckanext/apps/controllers.py:128
 msgid "You successfully closed app"
 msgstr ""
 
-#: ckanext/apps/controllers.py:121 ckanext/apps/controllers.py:189
-#: ckanext/apps/controllers.py:210
+#: ckanext/apps/controllers.py:131 ckanext/apps/controllers.py:200
+#: ckanext/apps/controllers.py:221
 msgid "You have errors in form"
 msgstr ""
 
-#: ckanext/apps/controllers.py:148
+#: ckanext/apps/controllers.py:158
 msgid "You can't set rank for your app"
 msgstr ""
 
-#: ckanext/apps/controllers.py:156
-msgid "You successfully set rank {0}"
+#: ckanext/apps/controllers.py:166
+#, python-format
+msgid "You successfully set rank %s"
 msgstr ""
 
-#: ckanext/apps/controllers.py:184
+#: ckanext/apps/controllers.py:195
 msgid "You successfully create app"
 msgstr ""
 
-#: ckanext/apps/controllers.py:207
+#: ckanext/apps/controllers.py:218
 msgid "You successfully create thread"
 msgstr ""
 
-#: ckanext/apps/controllers.py:281
+#: ckanext/apps/controllers.py:302
 msgid "You successfully hided board"
 msgstr ""
 
-#: ckanext/apps/controllers.py:291
+#: ckanext/apps/controllers.py:312
 msgid "You successfully unhided board"
 msgstr ""
 
@@ -152,10 +165,6 @@ msgstr ""
 msgid "Image URL"
 msgstr ""
 
-#: ckanext/apps/templates/create_app.html:62
-msgid "Remove"
-msgstr ""
-
 #: ckanext/apps/templates/create_app.html:69
 msgid "Upload a file on your computer"
 msgstr ""
@@ -192,11 +201,11 @@ msgstr ""
 msgid "Publish"
 msgstr ""
 
-#: ckanext/apps/templates/show_app.html:20
+#: ckanext/apps/templates/show_app.html:18
 msgid "Rating"
 msgstr ""
 
-#: ckanext/apps/templates/show_app.html:35
+#: ckanext/apps/templates/show_app.html:33
 msgid "Go to Application"
 msgstr ""
 

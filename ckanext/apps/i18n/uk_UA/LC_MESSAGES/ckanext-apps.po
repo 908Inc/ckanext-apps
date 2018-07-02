@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-apps 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-06-04 17:56+0000\n"
+"POT-Creation-Date: 2018-07-02 07:52+0000\n"
 "PO-Revision-Date: 2018-03-02 11:11+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk_UA\n"
@@ -20,48 +20,61 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.3\n"
 
-#: ckanext/apps/controllers.py:57
+#: ckanext/apps/controllers.py:28
+msgid "active"
+msgstr "активний"
+
+#: ckanext/apps/controllers.py:29
+msgid "pending"
+msgstr "очікування"
+
+#: ckanext/apps/controllers.py:30
+msgid "close"
+msgstr "закрити"
+
+#: ckanext/apps/controllers.py:64
 msgid "You added an application"
 msgstr "Ви додали додаток"
 
-#: ckanext/apps/controllers.py:59
+#: ckanext/apps/controllers.py:66
 msgid "Your application has been approved"
 msgstr "Ваш додаток був опублікований"
 
-#: ckanext/apps/controllers.py:61
+#: ckanext/apps/controllers.py:68
 msgid "Your application has been rejected"
 msgstr "Ваш додаток відхилено"
 
-#: ckanext/apps/controllers.py:118
+#: ckanext/apps/controllers.py:128
 msgid "You successfully closed app"
 msgstr "Ви успішно закрили додаток"
 
-#: ckanext/apps/controllers.py:121 ckanext/apps/controllers.py:189
-#: ckanext/apps/controllers.py:210
+#: ckanext/apps/controllers.py:131 ckanext/apps/controllers.py:200
+#: ckanext/apps/controllers.py:221
 msgid "You have errors in form"
 msgstr "У формі є помилки"
 
-#: ckanext/apps/controllers.py:148
+#: ckanext/apps/controllers.py:158
 msgid "You can't set rank for your app"
 msgstr "Неможливо голосувати за свій власний додаток"
 
-#: ckanext/apps/controllers.py:156
-msgid "You successfully set rank {0}"
-msgstr "Ви проголосували {0}"
+#: ckanext/apps/controllers.py:166
+#, python-format
+msgid "You successfully set rank %s"
+msgstr "Ви проголосували %s"
 
-#: ckanext/apps/controllers.py:184
+#: ckanext/apps/controllers.py:195
 msgid "You successfully create app"
 msgstr "Ви успішно зареєстрували додаток. Після перевірки він буде опублікований."
 
-#: ckanext/apps/controllers.py:207
+#: ckanext/apps/controllers.py:218
 msgid "You successfully create thread"
 msgstr "Ви успішно створили тему"
 
-#: ckanext/apps/controllers.py:281
+#: ckanext/apps/controllers.py:302
 msgid "You successfully hided board"
 msgstr "Ви успішно закрили розділ"
 
-#: ckanext/apps/controllers.py:291
+#: ckanext/apps/controllers.py:312
 msgid "You successfully unhided board"
 msgstr "Ви успішно відкрили розділ"
 
@@ -157,10 +170,6 @@ msgstr "Лого"
 msgid "Image URL"
 msgstr "Посилання на зображення"
 
-#: ckanext/apps/templates/create_app.html:62
-msgid "Remove"
-msgstr "Прибрати"
-
 #: ckanext/apps/templates/create_app.html:69
 msgid "Upload a file on your computer"
 msgstr "Завантажити"
@@ -197,11 +206,11 @@ msgstr "Будь ласка, вкажіть посилання"
 msgid "Publish"
 msgstr "Опублікувати"
 
-#: ckanext/apps/templates/show_app.html:20
+#: ckanext/apps/templates/show_app.html:18
 msgid "Rating"
 msgstr "Рейтинг"
 
-#: ckanext/apps/templates/show_app.html:35
+#: ckanext/apps/templates/show_app.html:33
 msgid "Go to Application"
 msgstr "Перейти до додатку"
 
@@ -216,8 +225,8 @@ msgstr "Ваш додаток приховано адміністратором.
 #: ckanext/apps/templates/email/app_pending_app_mail.html:5
 msgid "You added the app, expect it to be published."
 msgstr ""
-"Ви успішно додали додаток. Очікуйте, будь ласка, "
-"підтвердження адміністратором"
+"Ви успішно додали додаток. Очікуйте, будь ласка, підтвердження "
+"адміністратором"
 
 #: ckanext/apps/templates/email/base.html:1
 msgid "Dear"

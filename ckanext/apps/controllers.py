@@ -24,6 +24,13 @@ tuplize_dict = logic.tuplize_dict
 log = logging.getLogger(__name__)
 
 
+STATUSES = {
+    "active": tk._("active"),
+    "pending": tk._("pending"),
+    "close": tk._("close")
+}
+
+
 def do_if_user_not_sysadmin():
     if not c.userobj:
         tk.redirect_to(tk.url_for(controller='user', action='login', came_from=tk.request.path))
@@ -156,7 +163,8 @@ class AppsController(BaseController):
             mark.app_id = app.id
         mark.mark = rate
         mark.save()
-        flash_success(tk._('You successfully set rank {0}'.format(rate)))
+        msg = tk._('You successfully set rank %s')
+        flash_success(msg % rate)
         return tk.redirect_to(tk.url_for('apps_app_show', id=app.id))
 
     def app_add(self):
@@ -267,7 +275,7 @@ class AppsController(BaseController):
         )
         context = {
             'activity': sorted(activity, key=itemgetter('created'), reverse=True),
-            'statuses': ["active", "pending", "close"],
+            'statuses': STATUSES,
         }
         return self.__render('apps_activity.html', context)
 
