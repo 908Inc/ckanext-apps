@@ -31,7 +31,8 @@ class AppsPlugin(AppsPluginBase):
     def after_map(self, sub_map):
         from ckan.config.routing import SubMapper
         with SubMapper(sub_map, controller='ckanext.apps.controllers:AppsController') as m:
-            m.connect('apps_index', '/apps', action='index')
+            m.connect('apps_index', '/apps', action='index',
+                      highlight_actions='index show_app app_add board_add activity board_show')
             m.connect('apps_app_show', '/apps/show/:id', action='show_app')
             m.connect('apps_app_add', '/apps/add', action='app_add')
             m.connect('apps_board_add', '/apps/board_add', action='board_add')
