@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-apps 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-02 07:52+0000\n"
+"POT-Creation-Date: 2018-07-03 08:15+0000\n"
 "PO-Revision-Date: 2018-03-02 11:11+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk_UA\n"
@@ -29,8 +29,8 @@ msgid "pending"
 msgstr "очікування"
 
 #: ckanext/apps/controllers.py:30
-msgid "close"
-msgstr "закрити"
+msgid "reject"
+msgstr "відхилити"
 
 #: ckanext/apps/controllers.py:64
 msgid "You added an application"

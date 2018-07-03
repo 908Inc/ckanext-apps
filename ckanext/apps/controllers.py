@@ -27,7 +27,7 @@ log = logging.getLogger(__name__)
 STATUSES = {
     "active": tk._("active"),
     "pending": tk._("pending"),
-    "close": tk._("close")
+    "close": tk._("reject")
 }
 
 
