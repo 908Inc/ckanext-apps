@@ -230,7 +230,7 @@ msgstr ""
 
 #: ckanext/apps/templates/email/base.html:1
 msgid "Dear"
-msgstr "Дорогий"
+msgstr "Шановний"
 
 #: ckanext/apps/templates/email/base.html:6
 msgid "Have a nice day."
