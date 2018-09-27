@@ -137,9 +137,11 @@ class AppsController(BaseController):
 
     def show_app(self, id):
         app = App.get_by_id(id=id)
-        if not c.userobj:
+        if not app:
             return tk.redirect_to(tk.url_for("apps_index"))
-        if not app or app.status != "active" and not c.userobj.sysadmin:
+        if c.userobj and c.userobj.sysadmin:
+            return self.__render('show_app.html', {'app': app})
+        if app.status != 'active':
             return tk.redirect_to(tk.url_for("apps_index"))
         return self.__render('show_app.html', {'app': app})
 
