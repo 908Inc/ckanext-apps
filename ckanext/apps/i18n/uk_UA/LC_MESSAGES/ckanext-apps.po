@@ -106,7 +106,7 @@ msgstr "Створити розділ"
 
 #: ckanext/apps/templates/apps_base.html:23
 msgid "All Applications"
-msgstr "Усі додаткі"
+msgstr "Усі додатки"
 
 #: ckanext/apps/templates/apps_base.html:30
 msgid "Choose a Section"
