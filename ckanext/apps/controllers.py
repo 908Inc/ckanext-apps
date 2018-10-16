@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 from operator import itemgetter
 
 import ckan.lib.jobs as jobs
@@ -12,7 +13,6 @@ from ckan.common import c
 from ckan.lib.base import BaseController, abort
 from ckan.lib.helpers import flash_success, flash_error, full_current_url, get_page_number, Page, redirect_to
 from ckan.plugins import toolkit as tk
-from jinja2.filters import do_striptags
 
 from ckanext.apps.forms import CreateAppForm, CreateBoardForm, CloseAppForm
 from ckanext.apps.models import App, Board, Mark
@@ -29,6 +29,9 @@ STATUSES = {
     "pending": tk._("pending"),
     "close": tk._("reject")
 }
+
+def strip_tags(text):
+    return re.sub('<[^<]+?>', '', text)
 
 
 def do_if_user_not_sysadmin():
@@ -191,11 +194,11 @@ class AppsController(BaseController):
                     app = App()
                     form.populate_obj(app)
                     app.author_id = c.userobj.id
-                    app.content = do_striptags(app.content)
+                    app.content = strip_tags(app.content)
                     app.status = "pending"
                     app.image_url = data_dict.get('image_url')
                     app.save()
-                    log.debug("App data is valid. Content: %s", do_striptags(app.name))
+                    log.debug("App data is valid. Content: %s", strip_tags(app.name))
                     flash_success(tk._('You successfully create app'))
                     jobs.enqueue(send_notifications_on_change_app_status, [app, 'pending',
                                                                            tk.request.environ.get('CKAN_LANG')])
