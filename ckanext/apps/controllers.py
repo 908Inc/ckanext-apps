@@ -31,7 +31,8 @@ STATUSES = {
 }
 
 def strip_tags(text):
-    return re.sub('<[^<]+?>', '', text)
+    new_line_text = text.replace('\n', '\n\r')
+    return re.sub('<[^<]+?>', '', new_line_text)
 
 
 def do_if_user_not_sysadmin():
