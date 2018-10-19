@@ -34,6 +34,7 @@ class AppsPlugin(AppsPluginBase):
             m.connect('apps_index', '/apps', action='index',
                       highlight_actions='index show_app app_add board_add activity board_show')
             m.connect('apps_app_show', '/apps/show/:id', action='show_app')
+            m.connect('apps_app_edit', '/apps/edit/:id', action='edit_app')
             m.connect('apps_app_add', '/apps/add', action='app_add')
             m.connect('apps_board_add', '/apps/board_add', action='board_add')
             m.connect('apps_activity', '/apps/activity', action='activity')

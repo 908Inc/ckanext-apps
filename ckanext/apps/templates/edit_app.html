@@ -1,0 +1,66 @@
+{% extends "apps_base.html" %}
+
+{% block title %}{% trans %}Edit an Application{% endtrans %} - {% trans %}Applications{% endtrans %} {{ g.template_title_deliminater }} {{ g.site_title }}{% endblock %}
+
+{% block primary_content %}
+    <div class="thread-post">
+        <h1 class="page-heading">{% trans %}Edit an Application{% endtrans %}</h1>
+
+        <form id="thread-form" data-toggle="validator" role="form" method="post" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+
+            <div class="form-group forum-title-group">
+                <label>{% trans %}Provide a Title{% endtrans %}</label>
+                <input type="text" placeholder="" class="form-control"
+                       name="name" data-msg-required="{% trans %}Please fill out the title field{% endtrans %}" value="{{ form.name.data or '' }}" required>
+                {% if form.name.errors %}
+                    <div class="help-block with-errors alert-error">
+                        {% for error in form.name.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+          <div class="form-group forum-title-group">
+                <label>{% trans %}Link to the Application{% endtrans %}</label>
+                <input type="text" placeholder="" class="form-control"
+                       name="external_link" data-msg-required="{% trans %}Please provide the link{% endtrans %}" value="{{ form.external_link.data or '' }}" required>
+                {% if form.external_link.errors %}
+                    <div class="help-block with-errors alert-error">
+                        {% for error in form.external_link.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label>{% trans %}Application's Description{% endtrans %}</label>
+                <textarea class="form-control" rows="8" placeholder="" name="content"
+                          data-msg-required="{% trans %}Please fill out the description field{% endtrans %}" required>{{ form.content.data or '' }}</textarea>
+                {% if form.content.errors %}
+                    <div class="help-block with-errors alert-error">
+                        {% for error in form.content.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <div class="post-footer">
+                <span>* {% trans %}You can use Markdown formatting here{% endtrans %}</span>
+
+                <button type="submit" class="btn btn-primary">{% trans %}Save{% endtrans %}</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+        {{ super() }}  
+        {% resource 'forum/javascript/autosize.js' %}
+        {% resource 'forum/javascript/jquery.validate.js' %}     
+        {% resource 'forum/javascript/forms_validate.js' %}
+{% endblock %}
