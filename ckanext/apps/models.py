@@ -187,6 +187,12 @@ class App(object):
         if commit:
             session.commit()
 
+    def delete(self, commit=True):
+        session = Session()
+        session.delete(self)
+        if commit:
+            session.commit()
+
     @classmethod
     def all(cls):
         query = Session.query(cls).filter()

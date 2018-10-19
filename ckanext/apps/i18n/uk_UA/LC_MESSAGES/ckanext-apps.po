@@ -248,3 +248,15 @@ msgstr "Додаток успішно оновлений"
 #: ckanext/apps/templates/edit_app.html:7
 msgid "Edit an Application"
 msgstr "Редагувати додаток"
+
+#: ckanext-apps/ckanext/apps/templates/edit_app.html:56
+msgid "Are you sure you want to delete this application?"
+msgstr "Ви певні, що хочете видалити цей додаток?"
+
+#: ckanext-apps/ckanext/apps/templates/edit_app.html:65
+msgid "Back to application page"
+msgstr "Повернутися на сторінку додатка"
+
+#: ckanext-apps/ckanext/apps/controllers.py:378
+msgid "Application successfully deleted"
+msgstr "Додаток успішно видалений"
