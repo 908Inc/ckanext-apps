@@ -239,3 +239,12 @@ msgstr "Доброго дня"
 #: ckanext/apps/templates/email/base.html:10
 msgid "Message sent by"
 msgstr "Відправлено"
+
+#: ckanext-apps/ckanext/apps/controllers.py:353
+msgid "Application successfully updated"
+msgstr "Додаток успішно оновлений"
+
+#: ckanext/apps/templates/edit_app.html:3
+#: ckanext/apps/templates/edit_app.html:7
+msgid "Edit an Application"
+msgstr "Редагувати додаток"

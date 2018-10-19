@@ -350,7 +350,7 @@ class AppsController(BaseController):
                 app.external_link = strip_tags(form.external_link.data)
                 app.save()
                 log.debug("App data is valid. Content: %s", strip_tags(app.name))
-                flash_success(tk._('Application successfully saved'))
+                flash_success(tk._('Application successfully updated'))
                 tk.redirect_to(app.get_absolute_url())
             else:
                 flash_error(tk._('You have errors in form'))
