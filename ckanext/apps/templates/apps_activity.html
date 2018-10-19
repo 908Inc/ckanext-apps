@@ -10,7 +10,11 @@
                 <a class="heading" href="{{ act.url }}" title="{{ act.name }}">
                     {{ act.name }}
                 </a>
-                <p class="description">{{ h.markdown_extract(act.content, extract_length=100) }}</p>
+                <p class="description">
+                    {% for line in h.markdown_extract(act.content, extract_length=100).splitlines() %}
+                        {{ line }}<br>
+                    {% endfor %}
+                </p>
                 <a href="{{ h.url_for(controller='user', action='read', id=act.author_name) }}">
                     {{ act.author_name }}
                 </a> {{ h.time_ago_from_timestamp(act.created) }}
@@ -31,6 +35,7 @@
                           {% endif %}
                         {% endfor %}
                     </ul>
+                </div>
             </li>
         {% endfor %}
     </ul>

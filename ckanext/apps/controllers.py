@@ -14,7 +14,7 @@ from ckan.lib.base import BaseController, abort
 from ckan.lib.helpers import flash_success, flash_error, full_current_url, get_page_number, Page, redirect_to
 from ckan.plugins import toolkit as tk
 
-from ckanext.apps.forms import CreateAppForm, CreateBoardForm, CloseAppForm
+from ckanext.apps.forms import CreateAppForm, CreateBoardForm, CloseAppForm, EditAppForm
 from ckanext.apps.models import App, Board, Mark
 
 clean_dict = logic.clean_dict
@@ -31,8 +31,8 @@ STATUSES = {
 }
 
 def strip_tags(text):
-    new_line_text = text.replace('\n', '\n\r')
-    return re.sub('<[^<]+?>', '', new_line_text)
+    # new_line_text = text.replace('\n', '\n\r')
+    return re.sub('<[^<]+?>', '', text)
 
 
 def do_if_user_not_sysadmin():
@@ -140,7 +140,11 @@ class AppsController(BaseController):
         return self.__render('close_app.html', context)
 
     def show_app(self, id):
-        app = App.get_by_id(id=id)
+        try:
+            app_id = int(id)
+        except ValueError:
+            abort(404)
+        app = App.get_by_id(id=app_id)
         if not app:
             return tk.redirect_to(tk.url_for("apps_index"))
         if c.userobj and c.userobj.sysadmin:
@@ -150,9 +154,13 @@ class AppsController(BaseController):
         return self.__render('show_app.html', {'app': app})
 
     def set_mark(self, id, rate):
-        app = App.get_by_id(id=id)
         if c.userobj is None:
             return tk.redirect_to(tk.url_for(controller='user', action='login'))
+        try:
+            app_id = int(id)
+        except ValueError:
+            abort(404)
+        app = App.get_by_id(id=app_id)
         mark = Mark.get_by_user(c.userobj.id, app.id)
         try:
             rate = int(rate)
@@ -288,11 +296,15 @@ class AppsController(BaseController):
         return self.__render('apps_activity.html', context)
 
     def change_app_status(self, id, status):
-        app = App.get_by_id(id=id)
-        if not app:
-            abort(404)
         if c.userobj is None or not c.userobj.sysadmin:
             tk.redirect_to(tk.url_for(controller='user', action='login'))
+        try:
+            app_id = int(id)
+        except ValueError:
+            abort(404)
+        app = App.get_by_id(id=app_id)
+        if not app:
+            abort(404)
         app.status = status
         app.closed_message = ""
         app.save()
@@ -319,3 +331,34 @@ class AppsController(BaseController):
         board.unhide()
         flash_success(tk._('You successfully unhided board'))
         tk.redirect_to(tk.url_for('apps_index'))
+
+    def edit_app(self, id):
+        if c.userobj is None or not c.userobj.sysadmin:
+            abort(404)
+        try:
+            app_id = int(id)
+        except ValueError:
+            abort(404)
+        app = App.get_by_id(id=app_id)
+        if not app:
+            abort(404)
+        form = EditAppForm(tk.request.POST)
+        if tk.request.POST:
+            if form.validate():
+                app.name = strip_tags(form.name.data)
+                app.content = strip_tags(form.content.data)
+                app.external_link = strip_tags(form.external_link.data)
+                app.save()
+                log.debug("App data is valid. Content: %s", strip_tags(app.name))
+                flash_success(tk._('Application successfully saved'))
+                tk.redirect_to(app.get_absolute_url())
+            else:
+                flash_error(tk._('You have errors in form'))
+                log.info("Validate errors: %s", form.errors)
+        form.name.data = app.name
+        form.content.data = app.content
+        form.external_link.data = app.external_link
+        context = {
+            'form': form
+        }
+        return tk.render('edit_app.html', context)

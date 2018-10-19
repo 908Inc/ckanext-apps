@@ -12,6 +12,13 @@ class CreateAppForm(Form):
     external_link = StringField(validators=[validators.InputRequired(),
                                             validators.Length(min=1)])
 
+class EditAppForm(Form):
+    name = StringField(validators=[validators.InputRequired(),
+                                   validators.Length(min=1)])
+    content = TextAreaField(validators=[validators.InputRequired(),
+                                        validators.Length(min=1)])
+    external_link = StringField(validators=[validators.InputRequired(),
+                                            validators.Length(min=1)])
 
 class CreateBoardForm(Form):
     name = StringField(validators=[validators.InputRequired(),

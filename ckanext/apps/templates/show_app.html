@@ -30,14 +30,19 @@
       </div>
       <div class="app-lead">
         <p class="action">
-          <a class="btn full-width" href="{{ app.external_link }}">{% trans %}Go to Application{% endtrans %}</a>
+          <a class="btn {% if not c.userobj.sysadmin %}full-width{% endif %}" href="{{ app.external_link }}">{% trans %}Go to Application{% endtrans %}</a>
+        {% if c.userobj.sysadmin %}
+          <a class="btn" href="{{ h.url_for('apps_app_edit', id=app.id) }}"><i class="fa fa-wrench"></i> Керування</a>
+        {% endif %}
         </p>
       </div>
     </div>
     <div class="clearfix"></div>
     <div class="forum-post-body">
       <div class="app-description">
-        {{ h.render_markdown(app.content) }}
+          {% for line in h.render_markdown(app.content).splitlines() %}
+              {{ line }}<br>
+          {% endfor %}
       </div>
     </div>
   </div>
