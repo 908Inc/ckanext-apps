@@ -359,6 +359,22 @@ class AppsController(BaseController):
         form.content.data = app.content
         form.external_link.data = app.external_link
         context = {
-            'form': form
+            'form': form,
+            'app_id': app.id
         }
         return tk.render('edit_app.html', context)
+
+    def delete_app(self, id):
+        if c.userobj is None or not c.userobj.sysadmin:
+            abort(404)
+        try:
+            app_id = int(id)
+        except ValueError:
+            abort(404)
+        app = App.get_by_id(id=app_id)
+        if not app:
+            abort(404)
+        app.delete()
+        flash_success(tk._('Application successfully deleted'))
+        tk.redirect_to(tk.url_for('apps_index'))
+
