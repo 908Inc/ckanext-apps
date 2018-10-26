@@ -6,7 +6,7 @@
     <div class="thread-post">
         <h1 class="page-heading">{% trans %}Edit an Application{% endtrans %}</h1>
 
-        <form id="thread-form" data-toggle="validator" role="form" method="post" enctype="multipart/form-data">
+        <form id="thread-form" data-toggle="validator" role="form" method="post" enctype="multipart/form-data" class="prevent-ds">
             {{ form.csrf_token }}
 
             <div class="form-group forum-title-group">
