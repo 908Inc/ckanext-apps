@@ -6,7 +6,7 @@
     <div class="thread-post">
         <h1 class="page-heading">{% trans %}Create Section{% endtrans %}</h1>
 
-        <form id="thread-form" data-toggle="validator" role="form" method="post">
+        <form id="thread-form" data-toggle="validator" role="form" method="post" class="prevent-ds">
             {{ form.csrf_token }}
 
             <div class="form-group forum-title-group">
